@@ -1,0 +1,14 @@
+{
+  "id": "unk_6f0fec41448f18fc",
+  "revision": 1,
+  "question": "Exact look of the original window (colours, layout proportions) — no reference picture or capture of it running.",
+  "severity": "medium",
+  "domain": "visual",
+  "status": "open",
+  "probes": [
+    "Person adds screenshot to reference/",
+    "Capture of running app"
+  ],
+  "evidence_for": [],
+  "evidence_against": []
+}

@@ -1,0 +1,25 @@
+[package]
+name = "oxide-text"
+version = "0.1.0"
+edition = "2021"
+description = "A fast, cross-platform markdown-first text editor that still reads code with syntax highlighting."
+license = "MIT"
+
+[[bin]]
+name = "oxide-text"
+path = "src/main.rs"
+
+[dependencies]
+eframe = { version = "0.33", default-features = false, features = ["default_fonts", "glow", "wayland", "x11"] }
+egui = "0.33"
+syntect = { version = "5.3", default-features = false, features = ["default-fancy"] }
+pulldown-cmark = { version = "0.13", default-features = false, features = ["html"] }
+rfd = "0.16"
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+
+[profile.dev.package."*"]
+opt-level = 2

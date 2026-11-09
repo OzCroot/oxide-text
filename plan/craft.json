@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "name": "sublime_text",
+  "request": "Same app but with changes, more based around markdown editing, formatting, but still supporting reading code with syntax highlighting.",
+  "target": {
+    "kind": "local",
+    "path": "C:\\Program Files\\Sublime Text\\sublime_text.exe"
+  },
+  "stack": "Rust + egui (eframe)",
+  "status": "building",
+  "note": "Building the first version…",
+  "created_ms": 1794196330421,
+  "updated_ms": 1794197069836,
+  "checks": [],
+  "agent_session": "16531ca3-9b6b-4ed4-a351-311e4334fc07",
+  "agent_session_by": "claude-code",
+  "allowed_actions": [],
+  "last_reply": "",
+  "asset_budget_usd": 5.0,
+  "generate_assets": false
+}

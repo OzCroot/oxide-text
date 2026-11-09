@@ -1,0 +1,33 @@
+{
+  "revision": 4,
+  "brief": {
+    "question": "Rebuild a Sublime-Text-like desktop editor, refocused on markdown editing/formatting while keeping syntax-highlighted code reading.",
+    "purpose": "Person wants own cross-platform markdown-centric editor in Rust/egui.",
+    "targets": [
+      "C:\\Program Files\\Sublime Text\\sublime_text.exe"
+    ],
+    "constraints": [
+      "Clean room: nothing inside target read",
+      "No reference pictures available",
+      "Rust + eframe/egui, cross platform",
+      "Docs written into app/"
+    ],
+    "done_when": "cargo build succeeds, --screenshot works, rebuild_check passes, docs in app/."
+  },
+  "plan": [
+    {
+      "title": "Write the plan and documentation",
+      "status": "done",
+      "why": "Person asked for documentation only, no build"
+    },
+    {
+      "title": "Build the app",
+      "status": "blocked",
+      "why": "Person said not to build yet; waiting for refined plan"
+    }
+  ],
+  "hypotheses": [],
+  "findings": [],
+  "handoff": "Person asked: no build, only documentation of how app works so they can refine plan. Wrote app/README.md, PLAN.md, SHORTCUTS.md, ARCHITECTURE.md, ROADMAP.md (14 open questions). app/src has unbuilt drafts (theme, highlight, markdown, preview, commands) + stub main.rs; not wired. Did NOT run cargo build or rebuild_check per person's wish. cargo shim in ~/.cargo/bin broken; use ~/.rustup/toolchains/stable-x86_64-pc-windows-msvc/bin directly. Deps fetched (egui 0.33.3). Next: person refines plan, answers open questions, then build stage 1.",
+  "updated": "2026-11-09T04:06:29Z"
+}
