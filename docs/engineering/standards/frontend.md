@@ -1,54 +1,30 @@
 # Frontend Coding Standards
 
+The project has no frontend code yet. This file records the decided
+rules. The team sets the linter, the formatter, and the TypeScript options
+in milestone M0.
+
 ## TypeScript
 
-- **Strict mode** enabled
-- No implicit `any`. All types must be explicit.
-- Prefix unused parameters with `_`
+- The frontend language is TypeScript. See [ADR 0002](../../adr/0002-use-svelte-5-typescript-vite.md).
+- The team has not set the compiler options.
 
-<!-- SCAFFOLD: Add your project's specific TS conventions -->
+## Linting and Formatting
 
-## Linting
+Not set.
 
-<!-- SCAFFOLD: Replace with your linting setup -->
+## Editor Rules
 
-Config: `eslint.config.ts`
-
-- Type-aware linting enabled
-- Framework-specific rules active
-- Run: `npx eslint .`
-
-## Formatting
-
-<!-- SCAFFOLD: Replace with your Prettier / formatter config -->
-
-Config: `.prettierrc.json`
-
-```json
-{
-  "semi": false,
-  "singleQuote": true,
-  "printWidth": 100,
-  "tabWidth": 2
-}
-```
+- The CodeMirror state holds the text buffers. The Rust core does not.
+- Live mode must never replace the text nodes on the cursor line.
+- Every user action is a command with a string id. Do not hard code a shortcut.
+- Virtualise every long list.
+- Avoid heavy CSS effects. Linux uses WebKitGTK, which is slow.
 
 ## Styles
 
-<!-- SCAFFOLD: Replace with your CSS/SCSS approach -->
-
-- {{CSS_APPROACH}} for styling
-- CSS custom properties for component-level values
-- Max nesting depth: 2-3 levels
-- Mobile-first responsive approach
+Not set.
 
 ## Import Aliases
 
-<!-- SCAFFOLD: Replace with your path aliases -->
-
-| Alias | Path |
-|-------|------|
-| `@/*` | `src/*` |
-| `@components/*` | `src/components/*` |
-| `@styles/*` | `src/styles/*` |
-| `@assets/*` | `src/assets/*` |
+Not set.

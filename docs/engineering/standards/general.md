@@ -1,37 +1,34 @@
 # General Coding Standards
 
+The project has no code yet. This file records the conventions the plan
+decides. The team adds the rest in milestone M0, and updates this file then.
+
 ## Editor Config
 
-Defined in `.editorconfig`:
-
-- UTF-8 charset
-- 2-space indentation
-- LF line endings
-- Max 100 character line width
-- Trim trailing whitespace
-- Insert final newline
+The project has no `.editorconfig` yet. The team adds one in milestone M0.
 
 ## Git Conventions
 
-- Branch naming: `feature/`, `fix/`, `chore/` prefixes
+- The main branch is `master`.
 - Commit messages: imperative mood, concise subject line
-- PRs target the `main` branch
+- PRs target the `master` branch
 
 ## Naming Conventions
 
-<!-- SCAFFOLD: Adjust the table to match your project's languages and conventions -->
-
 | Context | Convention | Example |
 |---------|-----------|---------|
-| Files (frontend) | <!-- for example, PascalCase component --> | `HeroBanner.tsx` |
-| Files (backend) | <!-- for example, PascalCase --> | `UserController.cs` |
 | Files (docs) | lowercase kebab-case | `architecture.md` |
-| CSS classes | <!-- for example, kebab-case, BEM, utility --> | `.card-holder` |
-| CSS custom props | `--kebab-case` | `--card-gap` |
-| TS/JS variables | camelCase | `userData` |
-| TS/JS classes | PascalCase | `BaseComponent` |
-| TS/JS constants | UPPER_SNAKE_CASE | `API_BASE_URL` |
-| Backend classes | PascalCase | `UserService` |
+| Rust crates | `ox-` prefix, kebab-case | `ox-session` |
+| Command ids | dotted `area.action`, camelCase action | `selection.addNextOccurrence` |
+| Setting keys | dotted lowercase, snake_case words | `tabs.pinned_compact` |
+| Language settings | `languages.<id>.<key>` | `languages.rust.format` |
+| Pack folders | `lang-<id>`, `keymap-<name>` | `packs/lang-rust/` |
+| Pack ids | `kind.name` | `lang.rust` |
+| Pack archives | `.oxpkg` | — |
+| Launcher mode prefixes | one character, set in the plan | `>`, `@`, `:` |
+
+The team sets file, variable, class, and constant naming for Rust and
+TypeScript in milestone M0.
 
 ## Code Review
 

@@ -154,7 +154,7 @@ docs/
 │   └── README.md               # the table + convention
 ├── engineering/                # HOW — generalised from platform-specific structure
 │   ├── architecture.md         # tech stack, high-level structure, build commands
-│   ├── standards/              # coding standards (general, language, frontend, backend, authoring, component-sizing)
+│   ├── standards/              # coding standards (general, language, frontend, backend, component-sizing)
 │   ├── frontend/               # frontend patterns & implementation
 │   ├── backend/                # backend patterns & implementation
 │   ├── data/                   # data models & contracts (API, events, content types)
@@ -191,12 +191,6 @@ docs/
 2. [engineering/standards/backend.md](./engineering/standards/backend.md) — language and framework rules
 3. [engineering/backend/architecture.md](./engineering/backend/architecture.md) — project structure, DI, middleware
 4. [engineering/backend/controllers.md](./engineering/backend/controllers.md) — API patterns
-
-### CMS / Content Developer
-
-1. Steps above, then:
-2. [engineering/standards/authoring.md](./engineering/standards/authoring.md) — content-editor UX rules
-3. `engineering/platform/<platform-name>/` — the project's CMS/platform-specific docs, created in Milestone 5 (see [`examples/platform-umbraco/`](../examples/platform-umbraco/) for the reference shape until then)
 
 ### Picking up a new feature
 

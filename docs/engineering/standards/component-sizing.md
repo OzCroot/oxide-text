@@ -126,6 +126,6 @@ An x-large component is a page-level or application-level feature that:
 
 - **Estimation:** use the tier to set expectations for build time and review scope
 - **Code review:** larger components need closer review of accessibility, performance, and responsive behaviour
-- **CMS modelling:** the tier sets how many content-type properties and editor options to expect. See `engineering/platform/<platform-name>/content-types.md`, once Milestone 5 creates it, or [the example](../../../examples/platform-umbraco/content-types.md) meanwhile.
+- **CMS modelling:** this project has no CMS, so ignore the CMS rows and traits in this file.
 - **Testing:** small components may need only visual review. Large components need interactive and cross-breakpoint testing.
 - **Component architecture:** see [frontend components](../frontend/components.md) for build patterns at each tier
