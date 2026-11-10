@@ -16,6 +16,7 @@ export const defaultKeymap: Binding[] = [
   // Views, outline, export
   { key: "mod+shift+v", command: "view.cycleMode" },
   { key: "mod+alt+o", command: "view.toggleOutline" },
+  { key: "mod+alt+m", command: "view.toggleMenuBar" },
   { key: "mod+alt+e", command: "export.html" },
   { key: "mod+alt+p", command: "export.pdf" },
   { key: "mod+alt+shift+c", command: "edit.copyAsRichText" },

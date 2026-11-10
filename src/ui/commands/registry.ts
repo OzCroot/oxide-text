@@ -13,6 +13,7 @@ export interface AppActions {
   setViewMode(mode: "source" | "preview" | "split"): void;
   cycleViewMode(): void;
   toggleOutline(): void;
+  toggleMenuBar(): void;
   exportHtml(): Promise<void>;
   exportPdf(): Promise<void>;
   copyAsRichText(): Promise<void>;

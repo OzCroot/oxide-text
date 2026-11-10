@@ -21,3 +21,4 @@ For a technical decision, see [../adr/](../adr/) instead.
 | 2026-11-10 | Source and project files moved under `src/` (`src/ui`, `src/tauri`, `package.json`, tool config). |
 | 2026-11-10 | Milestone M1 built: view modes, preview, scroll sync, Markdown editing commands, tables, paste, outline, folding, export. |
 | 2026-11-10 | Custom title bar. The dev server moved to port 1430. |
+| 2026-11-10 | Menu bar with ten hard-coded menus, and a hamburger button to show it. |

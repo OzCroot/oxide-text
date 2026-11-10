@@ -77,6 +77,7 @@ Every key is a command id in `keybindings.jsonc`. See
 |------|---------|
 | `Ctrl+Shift+V` | `view.cycleMode` (source, split, preview) |
 | `Ctrl+Alt+O` | `view.toggleOutline` |
+| `Ctrl+Alt+M` | `view.toggleMenuBar` |
 | `Ctrl+Alt+E`, `Ctrl+Alt+P`, `Ctrl+Alt+Shift+C` | `export.html`, `export.pdf`, `edit.copyAsRichText` |
 | `Ctrl+B`, `Ctrl+I`, `Ctrl+Shift+X`, `Ctrl+E`, `Ctrl+Alt+K` | bold, italic, strikethrough, inline code, link |
 | `Ctrl+1` to `Ctrl+6`, `Ctrl+0` | heading level 1 to 6, and no heading |

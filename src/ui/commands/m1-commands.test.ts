@@ -17,7 +17,7 @@ describe("M1 commands", () => {
     "table.insert", "table.addRowAbove", "table.addRowBelow", "table.deleteRow", "table.addColumnLeft", "table.addColumnRight",
     "table.deleteColumn", "table.alignLeft", "table.alignCenter", "table.alignRight", "table.format",
     // views, outline, export
-    "view.source", "view.preview", "view.split", "view.cycleMode", "view.toggleOutline", "export.html", "export.pdf", "edit.copyAsRichText",
+    "view.source", "view.preview", "view.split", "view.cycleMode", "view.toggleOutline", "view.toggleMenuBar", "export.html", "export.pdf", "edit.copyAsRichText",
     // folding
     "fold.fold", "fold.unfold", "fold.foldAll", "fold.unfoldAll",
   ];

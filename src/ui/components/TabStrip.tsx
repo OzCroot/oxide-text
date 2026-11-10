@@ -1,4 +1,4 @@
-import { Plus, X } from "lucide-react";
+import { Menu, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Tab } from "@/workspace";
@@ -9,11 +9,24 @@ interface Props {
   onActivate(id: string): void;
   onClose(id: string): void;
   onNew(): void;
+  menuBarOpen: boolean;
+  onToggleMenuBar(): void;
 }
 
-export function TabStrip({ tabs, activeId, onActivate, onClose, onNew }: Props) {
+export function TabStrip({ tabs, activeId, onActivate, onClose, onNew, menuBarOpen, onToggleMenuBar }: Props) {
   return (
     <div role="tablist" className="flex h-9 shrink-0 items-stretch overflow-x-auto border-b border-border bg-muted">
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label={menuBarOpen ? "Hide the menu bar" : "Show the menu bar"}
+        aria-pressed={menuBarOpen}
+        title={menuBarOpen ? "Hide the menu bar" : "Show the menu bar"}
+        onClick={onToggleMenuBar}
+        className="mx-1.5 my-1.5 shrink-0"
+      >
+        <Menu className="size-4" />
+      </Button>
       {tabs.map((t) => (
         <div
           key={t.id}

@@ -60,6 +60,25 @@ export function isMarkdownPath(path: string | null): boolean {
   return path === null || MARKDOWN_EXT.has(extensionOf(path));
 }
 
+const MENU_BAR_KEY = "oxide-text.menuBar";
+
+/** Whether the menu bar was open last time. Stored in the webview. The menu bar starts hidden. */
+function readMenuBarPreference(): boolean {
+  try {
+    return localStorage.getItem(MENU_BAR_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function writeMenuBarPreference(open: boolean): void {
+  try {
+    localStorage.setItem(MENU_BAR_KEY, open ? "1" : "0");
+  } catch {
+    // Storage can be off. The menu bar still works for this session.
+  }
+}
+
 function countWords(text: string): number {
   let n = 0;
   const re = /\S+/g;
@@ -84,6 +103,7 @@ export function useWorkspace(
   const [version, setVersion] = useState(0);
   const [stats, setStats] = useState<DocStats | null>(null);
   const [outlineOpen, setOutlineOpen] = useState(false);
+  const [menuBarOpen, setMenuBarOpen] = useState(readMenuBarPreference);
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [scrollToId, setScrollToId] = useState<{ id: string; n: number } | null>(null);
   /** The HTML to print. Set while a PDF export runs. */
@@ -473,6 +493,11 @@ export function useWorkspace(
       setViewMode,
       cycleViewMode,
       toggleOutline: () => setOutlineOpen((o) => !o),
+      toggleMenuBar: () =>
+        setMenuBarOpen((o) => {
+          writeMenuBarPreference(!o);
+          return !o;
+        }),
       exportHtml,
       exportPdf,
       copyAsRichText,
@@ -570,6 +595,7 @@ export function useWorkspace(
     version,
     stats,
     outlineOpen,
+    menuBarOpen,
     headings,
     scrollToId,
     printHtml,

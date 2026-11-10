@@ -12,6 +12,7 @@ export const appCommands: Command[] = [
   { id: "view.preview", title: "View: Preview", run: ({ app }) => app.setViewMode("preview") },
   { id: "view.split", title: "View: Split", run: ({ app }) => app.setViewMode("split") },
   { id: "view.cycleMode", title: "View: Cycle Source, Split, Preview", run: ({ app }) => app.cycleViewMode() },
+  { id: "view.toggleMenuBar", title: "View: Toggle Menu Bar", run: ({ app }) => app.toggleMenuBar() },
   { id: "view.toggleOutline", title: "View: Toggle Outline", run: ({ app }) => app.toggleOutline() },
   { id: "export.html", title: "Export as HTML…", run: ({ app }) => app.exportHtml() },
   { id: "export.pdf", title: "Export as PDF…", run: ({ app }) => app.exportPdf() },

@@ -23,3 +23,4 @@ team made, and the reason.
 | 2026-11-10 | Table columns are padded when a Markdown file saves (setting `markdown.formatTablesOnSave`, on by default). | The plan says to format on Tab or save. |
 | 2026-11-10 | The default view mode of a new tab is source. | Open question 2 in the plan is still open. |
 | 2026-11-10 | The app draws its own title bar and has no native one. See ADR 0013. | The native bar is missing on some Linux compositors, and it differs on each system. |
+| 2026-11-10 | A menu bar under the title bar, shown by a hamburger button. The menus are hard coded for now. | The owner will set the content later. |

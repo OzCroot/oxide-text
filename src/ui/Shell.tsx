@@ -2,6 +2,7 @@ import { EditorState } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
+import { MenuBar } from "@/components/MenuBar";
 import { Outline } from "@/components/Outline";
 import { Preview } from "@/components/Preview";
 import { StatusBar } from "@/components/StatusBar";
@@ -161,6 +162,14 @@ export function Shell({ settings, userKeybindings, theme, setTheme, onKeymapErro
   return (
     <div className="flex h-full flex-col">
       <TitleBar fileName={ws.active?.title ?? null} path={ws.active?.path ?? null} dirty={ws.active?.dirty ?? false} />
+      <MenuBar
+        open={ws.menuBarOpen}
+        registry={ws.registry}
+        keymap={keymap}
+        isMac={IS_MAC}
+        onRun={(id) => void registryRef.current.run(id, { view: viewRef.current, app: actionsRef.current })}
+        onClosed={() => viewRef.current?.focus()}
+      />
       {notices.length > 0 ? (
         <div role="alert" className="shrink-0 border-b border-border bg-accent px-3 py-1 text-xs">
           {notices.map((e, i) => (
@@ -175,6 +184,8 @@ export function Shell({ settings, userKeybindings, theme, setTheme, onKeymapErro
         onActivate={ws.activate}
         onClose={(id) => void ws.closeTab(id)}
         onNew={ws.newFile}
+        menuBarOpen={ws.menuBarOpen}
+        onToggleMenuBar={ws.actions.toggleMenuBar}
       />
       <div className="flex min-h-0 flex-1">
         {ws.outlineOpen && ws.active?.markdown ? (
