@@ -20,8 +20,7 @@ taxonomy, the file-by-file sitemap, and the maintenance rules.
 `docs/agents/` holds agent-tooling configuration, not project knowledge. It
 tells the `mattpocock/skills` engineering skills how to operate on this
 repo: the issue tracker, the triage labels, and the domain-doc layout.
-`SCAFFOLD-README.md`'s milestones do not populate `docs/agents/` per
-project — re-run `/setup-matt-pocock-skills` to change it.
+To change it, re-run `/setup-matt-pocock-skills`.
 
 > Follow [`docs/engineering/standards/language.md`](docs/engineering/standards/language.md)
 > for prose style, and [`docs/documentation-guide.md`](docs/documentation-guide.md#file-conventions)

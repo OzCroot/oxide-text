@@ -8,7 +8,7 @@ style it defines — use it as a working example.
 This standard governs:
 
 - All files under `docs/`
-- `AGENTS.md`, `CLAUDE.md`, `README.md`, `SCAFFOLD-README.md`
+- `AGENTS.md`, `CLAUDE.md`, `README.md`
 
 This standard does not govern:
 
