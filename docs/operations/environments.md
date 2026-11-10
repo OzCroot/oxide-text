@@ -4,7 +4,7 @@ oxide-text is a desktop application. It has no server and no database.
 
 ## Development
 
-- Run `pnpm tauri dev`. Vite serves the frontend on port 1420. The port is fixed, because Tauri expects it.
+- Run `pnpm tauri dev`. Vite serves the frontend on port 1430. The port is fixed, because Tauri expects it. It is not the Tauri default (1420), so this project can run beside another Tauri project.
 - `pnpm dev` alone does not work for file access. The editor needs the Tauri shell.
 
 ## Config folder
