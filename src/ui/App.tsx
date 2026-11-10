@@ -47,24 +47,14 @@ export default function App() {
   const all = [...errors, ...keymapErrors];
 
   return (
-    <div className="flex h-full flex-col">
-      {all.length > 0 ? (
-        <div role="alert" className="shrink-0 border-b border-border bg-accent px-3 py-1 text-xs">
-          {all.map((e, i) => (
-            <div key={i}>{e}</div>
-          ))}
-          {config.configDir ? <div className="text-muted-foreground">Config folder: {config.configDir}</div> : null}
-        </div>
-      ) : null}
-      <div className="min-h-0 flex-1">
-        <Shell
-          settings={settings}
-          userKeybindings={config.keybindings}
-          theme={theme}
-          setTheme={setThemeSetting}
-          onKeymapErrors={onKeymapErrors}
-        />
-      </div>
-    </div>
+    <Shell
+      settings={settings}
+      userKeybindings={config.keybindings}
+      theme={theme}
+      setTheme={setThemeSetting}
+      onKeymapErrors={onKeymapErrors}
+      notices={all}
+      configDir={config.configDir}
+    />
   );
 }

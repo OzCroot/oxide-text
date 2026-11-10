@@ -12,6 +12,7 @@ import { extensionForMime, htmlToMarkdown, insertAtSelection, linksForFiles, loo
 import { openFile, saveFile, saveImage, type Eol } from "@/lib/api";
 import { copyRichText, htmlDocument, renderSelfContained } from "@/markdown/export";
 import { anchorLine, extractHeadings, type Heading } from "@/markdown/headings";
+import { taskbarTitle } from "@/lib/title";
 import { baseName, dirname, extensionOf, joinPath, relativePath, stemOf } from "@/markdown/paths";
 import type { Settings, ThemeSetting, ViewMode } from "@/settings";
 
@@ -557,8 +558,8 @@ export function useWorkspace(
   // Show the file name and a dirty mark in the window title.
   const active = tabs.find((t) => t.id === activeId) ?? null;
   useEffect(() => {
-    const title = active ? `${active.dirty ? "● " : ""}${active.title} — oxide-text` : "oxide-text";
-    void getCurrentWindow().setTitle(title);
+    // The window manager and the taskbar show this title. The title bar in the app shows its own copy.
+    void getCurrentWindow().setTitle(taskbarTitle(active?.title ?? null, active?.dirty ?? false));
   }, [active?.title, active?.dirty]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {

@@ -18,7 +18,7 @@ src/ui/
 ├── Shell.tsx            # creates the editor view, routes every key to the keymap
 ├── workspace.ts         # tabs, the active editor state, open, save, close
 ├── settings.ts          # settings types, checks, theme resolution
-├── components/          # TabStrip, StatusBar, Preview, Outline, and ui/ (shadcn/ui)
+├── components/          # TitleBar, TabStrip, StatusBar, Preview, Outline, and ui/ (shadcn/ui)
 ├── commands/            # the command registry, app, editor, and Markdown commands
 ├── keymap/              # key parsing, `when` clauses, the resolver, the default keymap
 ├── editor/              # CodeMirror extensions, the large-block guard, paste handling
@@ -48,6 +48,7 @@ Preview: markdown-it, DOMPurify, scroll sync through data-line attributes
 - One `EditorView` shows the active tab. Each tab keeps its own `EditorState`, so its text, undo history, and selection stay with it. `workspace.ts` swaps the state on a tab change.
 - Text buffers live in the CodeMirror state.
 - `Shell.tsx` listens for `keydown` on the window, and the keymap resolver maps each key to a command id. The editor has no key map of its own.
+- **Title bar:** the app draws its own (`TitleBar.tsx`), with the file name, the unsaved dot, and the window buttons. The window has no native decorations. See [ADR 0013](../../adr/0013-custom-title-bar.md).
 - **View modes (M1):** each Markdown tab is in source, split, or preview mode. The editor stays mounted and is hidden in preview mode. Only Markdown files (`.md`, `.markdown`, and new files) get Markdown styling. Any other file opens as plain text.
 - **Preview pipeline:** `renderMarkdown` (markdown-it, adds `data-line` and heading ids) then `sanitizeHtml` (DOMPurify with extra rules). The webview never gets HTML that skipped the sanitizer. See [ADR 0012](../../adr/0012-preview-security-model.md).
 - **Links:** `classifyHref` decides what a click does. An anchor scrolls. A web link opens in the system browser. A relative path opens the file in a tab, resolved from the folder of the document. The webview never navigates. A link to a missing file or heading is marked in the preview.

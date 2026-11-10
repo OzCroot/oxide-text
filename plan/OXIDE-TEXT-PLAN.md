@@ -312,6 +312,7 @@ Matches F4. On quit, every window, pane, tab, pin, group and unsaved buffer is s
 - Sidebar folder tree: create, rename, delete-to-trash (`trash` crate), reveal, git status badges (`gix`, read-only, later).
 - Split layouts: 1–4 panes, grid. Drag tabs between panes and windows.
 - Minimap (later; low priority for Markdown).
+- **Custom title bar** (built): the app has no native title bar. It draws its own with the file name, an unsaved dot, and window buttons (ADR 0013).
 - Distraction-free, zen and typewriter modes. These matter for a Markdown-first app.
 - Settings UI generated from a JSON schema, with the raw JSONC still editable. Keymap editor, with record-a-key in the launcher.
 - CLI: `oxt <path>[:line]`, `oxt --wait` for git commit messages. Single-instance forwarding (tauri-plugin-single-instance).

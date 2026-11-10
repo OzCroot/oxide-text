@@ -22,3 +22,4 @@ team made, and the reason.
 | 2026-11-10 | Remote images in the preview are off by default, and the sanitizer is the only gate (the policy allows `https:` images so the setting can work). See ADR 0012. | Opening a file must not contact the network. |
 | 2026-11-10 | Table columns are padded when a Markdown file saves (setting `markdown.formatTablesOnSave`, on by default). | The plan says to format on Tab or save. |
 | 2026-11-10 | The default view mode of a new tab is source. | Open question 2 in the plan is still open. |
+| 2026-11-10 | The app draws its own title bar and has no native one. See ADR 0013. | The native bar is missing on some Linux compositors, and it differs on each system. |

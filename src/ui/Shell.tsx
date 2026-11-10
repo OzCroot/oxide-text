@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { Outline } from "@/components/Outline";
 import { Preview } from "@/components/Preview";
 import { StatusBar } from "@/components/StatusBar";
+import { TitleBar } from "@/components/TitleBar";
 import { TabStrip } from "@/components/TabStrip";
 import { markdownKeymap } from "@/commands/markdown-commands";
 import { defaultKeymap } from "@/keymap/default-keymap";
@@ -24,6 +25,9 @@ interface Props {
   theme: "light" | "dark";
   setTheme(t: ThemeSetting): void;
   onKeymapErrors(errors: string[]): void;
+  /** Problems with the config files, shown under the title bar. */
+  notices: string[];
+  configDir: string;
 }
 
 /** A copy of the rendered document that only the printer shows. Used for the PDF export. */
@@ -41,7 +45,7 @@ function PrintCopy({ html, onDone }: { html: string; onDone(): void }) {
   return createPortal(<div className="print-root md-preview" dangerouslySetInnerHTML={{ __html: html }} />, document.body);
 }
 
-export function Shell({ settings, userKeybindings, theme, setTheme, onKeymapErrors }: Props) {
+export function Shell({ settings, userKeybindings, theme, setTheme, onKeymapErrors, notices, configDir }: Props) {
   const ws = useWorkspace(settings, setTheme, theme);
   const host = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -156,6 +160,15 @@ export function Shell({ settings, userKeybindings, theme, setTheme, onKeymapErro
 
   return (
     <div className="flex h-full flex-col">
+      <TitleBar fileName={ws.active?.title ?? null} path={ws.active?.path ?? null} dirty={ws.active?.dirty ?? false} />
+      {notices.length > 0 ? (
+        <div role="alert" className="shrink-0 border-b border-border bg-accent px-3 py-1 text-xs">
+          {notices.map((e, i) => (
+            <div key={i}>{e}</div>
+          ))}
+          {configDir ? <div className="text-muted-foreground">Config folder: {configDir}</div> : null}
+        </div>
+      ) : null}
       <TabStrip
         tabs={ws.tabs}
         activeId={ws.activeId}
