@@ -1,0 +1,13 @@
+[package]
+name = "ox-fs"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+encoding_rs = "0.8"
+chardetng = "0.1"
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+
+[dev-dependencies]
+tempfile = "3"

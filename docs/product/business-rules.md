@@ -30,6 +30,8 @@ them is implemented.
 - **Render and code packs ask first:** a pack that runs JavaScript must show a permission prompt once.
 - **Preview output is sanitised:** the system must sanitise the rendered preview. It must not load remote images unless the workspace allows it.
 - **Relative links resolve from the file:** a relative link or image path must resolve against the folder of the file that contains it.
+- **A very long block opens as plain text:** the editor must not run the Markdown parser on a file with a block of more than 5,000 lines. The parser takes minutes on such a file.
+- **Saving keeps the encoding:** the system must save a file in the encoding it was read in, with the same byte order mark. It must refuse to save text that the encoding cannot hold.
 - **One group per tab:** a tab must belong to at most one group. A pinned tab must not be in a group. The tabs of a group must be next to each other.
 - **Pinned tabs come first:** pinned tabs must sit before all other tabs in a strip. Bulk close commands must skip them.
 - **A preview tab is transient:** a preview tab must never be pinned or grouped.

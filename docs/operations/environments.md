@@ -4,7 +4,14 @@ oxide-text is a desktop application. It has no server and no database.
 
 ## Development
 
-Not yet set up. The team defines the dev workflow in milestone M0.
+- Run `pnpm tauri dev`. Vite serves the frontend on port 1420. The port is fixed, because Tauri expects it.
+- `pnpm dev` alone does not work for file access. The editor needs the Tauri shell.
+
+## Config folder
+
+The app reads `settings.jsonc` and `keybindings.jsonc` from the Tauri app
+config folder. On Linux this is `~/.config/dev.oxide-text.app/`. If a file
+has an error, the app starts and shows the error in a banner.
 
 ## Production
 

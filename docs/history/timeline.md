@@ -17,3 +17,5 @@ None of them is complete.
 | 2026-11-10 | `README.md` added. |
 
 For a technical decision, see [../adr/](../adr/) instead.
+| 2026-11-10 | Milestone M0 built: Tauri, React, and CodeMirror skeleton, with tabs, open and save, command registry, keymap, settings, themes, and CI. |
+| 2026-11-10 | Source and project files moved under `src/` (`src/ui`, `src/tauri`, `package.json`, tool config). |

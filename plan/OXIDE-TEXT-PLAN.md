@@ -70,7 +70,7 @@ Rejected:
 │ Preview: markdown-it + sanitizer, scroll-sync via data-line attrs         │
 └───────────────▲──────────────────────────────────────▲────────────────────┘
                 │ invoke() commands                    │ Channel<T> streams
-┌───────────────┴──────────── Rust core (src-tauri) ───┴────────────────────┐
+┌───────────────┴──────────── Rust core (src/tauri) ───┴────────────────────┐
 │ ox-fs       open/save, encoding, EOL, atomic write, watcher               │
 │ ox-index    workspace file list, frecency store, nucleo matcher           │
 │ ox-search   ripgrep-style full-text search, streaming                     │
@@ -91,13 +91,18 @@ Repo layout:
 
 ```
 oxide-text/
-  src-tauri/            Rust app + crates/ (ox-fs, ox-index, ox-search, ox-pkg, ox-session, ox-settings)
-  ui/                   React app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
-    editor/commands/    one folder per editing feature (multicursor/, lines/, comment/, folding/)
-  packs/                first-party packs, one folder each (lang-rust/, lang-python/, keymap-sublime/)
-  tools/oxpkg/          CLI: build, lint, sign, publish packs
+  src/
+    tauri/              Rust app + crates/ (ox-fs, ox-index, ox-search, ox-pkg, ox-session, ox-settings)
+    ui/                 React app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
+      editor/commands/  one folder per editing feature (multicursor/, lines/, comment/, folding/)
+    packs/              first-party packs, one folder each (lang-rust/, lang-python/, keymap-sublime/)
+    tools/oxpkg/        CLI: build, lint, sign, publish packs
+    scripts/            project scripts (the installer size check)
   docs/
+  plan/
 ```
+
+`src/` also holds the project and tool files: `package.json`, the lockfile, `tsconfig.json`, `vite.config.ts`, and `components.json`. The repository root holds only `docs`, `plan`, `src`, `.github`, and a few Markdown and dot files.
 
 Layout reference: this follows [microsoft/vscode](https://github.com/microsoft/vscode). There, each language is a folder in `extensions/<lang>/` with a manifest, a grammar and a `language-configuration.json`. Each editing feature is a folder in `src/vs/editor/contrib/`. The VSCodium repo is not a model: it holds only build scripts and patches, with no editor source.
 
@@ -361,6 +366,8 @@ Configuration:
 | **M6 Live mode + polish** (3 wk) | Live (WYSIWYG-lite) mode, distraction-free, CLI, file associations, updater, settings UI, keymap editor, keymap presets, remaining first-party packs. | Beta. |
 | **M7 Trusted packs** (later) | iframe/worker sandbox, permission prompts, KaTeX and Mermaid render packs, code providers. | — |
 
+**M0 status (2026-11-10):** built. Deviations from this plan: the keymap resolver and command registry are TypeScript in the frontend, not `ox-commands` in Rust. Settings are read once at startup. The default keymap lacks `Ctrl+K Ctrl+D` (skip occurrence), and `editor.format` waits for M4. Closing a dirty tab asks only "discard?", with no "save" choice. Not yet measured: the macOS and Windows installer sizes, and opening a 10 MB file in the running app (the editor-state test passes).
+
 Testing: Rust unit and property tests (proptest) for the session, index and pkg crates. Vitest for the UI logic. WebdriverIO + tauri-driver for e2e on Windows and Linux (macOS has no WebDriver for WKWebView, so manual plus Playwright on component builds). Perf benchmarks in CI with a fixture repo.
 
 ---
@@ -369,6 +376,7 @@ Testing: Rust unit and property tests (proptest) for the session, index and pkg 
 | Risk | Mitigation |
 |---|---|
 | WebKitGTK on Linux is slow or has quirks | Test on Linux from M0. Avoid heavy CSS effects. Virtualise every long list. |
+| One very long Markdown block (for example a 10 MB file with no blank lines) | The Markdown parser time grows with the square of the block size. M0 measured about 150 ms at 3,600 lines in one block, and minutes at 10 MB. A file with a block over 5,000 lines opens as plain text (`src/ui/editor/large.ts`). Normal 10 MB Markdown parses in under 100 ms. |
 | Very large files (>50 MB) in CM6 | Above a threshold, open a read-only chunked viewer with no highlighting. |
 | tree-sitter WASM cost on huge files | Worker parse, visible-range queries, and a time budget per frame. |
 | Package supply chain | Signed index plus per-file hashes, data-only default tier, permission prompts for code packs. |

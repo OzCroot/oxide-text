@@ -16,3 +16,6 @@ team made, and the reason.
 | 2026-11-10 | Pack formatters are WASM modules. A user setting may point a language at an installed tool. | The sandbox is safe and works offline. The setting gives access to the real tools. |
 | 2026-11-10 | The default keymap follows VS Code and Sublime Text. The link command is `Ctrl+Alt+K`. | Users know these keys. `Ctrl+K` is a chord prefix. |
 | 2026-11-10 | The frontend uses React, shadcn/ui, and Tailwind CSS. This replaces Svelte. | The owner prefers React. It has the largest ecosystem, and shadcn/ui gives accessible components. |
+| 2026-11-10 | pnpm is the package manager. | Fast, strict, and CI can pin its version. See ADR 0011. |
+| 2026-11-10 | App source and project files are under `src/`: `src/ui`, `src/tauri`, `package.json`, and the Vite and TypeScript config. The repo root holds only `docs`, `plan`, `src`, and `.github`. The `scripts/` folder is under `src/` too. | A tidy root. |
+| 2026-11-10 | A file with a Markdown block of more than 5,000 lines opens as plain text. | The Markdown parser takes minutes on a 10 MB file with one block. |

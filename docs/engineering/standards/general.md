@@ -5,7 +5,10 @@ decides. The team adds the rest in milestone M0, and updates this file then.
 
 ## Editor Config
 
-The project has no `.editorconfig` yet. The team adds one in milestone M0.
+`.editorconfig` at the repository root sets: UTF-8, LF line endings, 2-space
+indent (4 for Rust), 100 character lines, final newline, and trimmed
+trailing whitespace. Markdown files keep trailing whitespace and have no
+line limit.
 
 ## Git Conventions
 
@@ -27,8 +30,15 @@ The project has no `.editorconfig` yet. The team adds one in milestone M0.
 | Pack archives | `.oxpkg` | — |
 | Launcher mode prefixes | one character, set in the plan | `>`, `@`, `:` |
 
-The team sets file, variable, class, and constant naming for Rust and
-TypeScript in milestone M0.
+| Context | Convention | Example |
+|---------|-----------|---------|
+| TypeScript files | kebab-case for modules, PascalCase for React components | `default-keymap.ts`, `TabStrip.tsx` |
+| TypeScript variables | camelCase | `activeId` |
+| TypeScript types | PascalCase | `CommandContext` |
+| TypeScript constants | UPPER_SNAKE_CASE | `MAX_BLOCK_LINES` |
+| Rust | the standard Rust style: snake_case functions, PascalCase types | `save_file`, `Decoded` |
+
+The project has no linter yet, so no tool checks these rules.
 
 ## Code Review
 

@@ -2,21 +2,21 @@
 
 ## Overview
 
-A Rust core in `src-tauri/`, inside a Tauri 2 shell. The project has no
-code yet. This file records the decided design. See
-[ADR 0001](../../adr/0001-use-tauri-with-rust-core.md).
+A Rust core in `src/tauri/`, inside a Tauri 2 shell. See
+[ADR 0001](../../adr/0001-use-tauri-with-rust-core.md). The crates marked
+"built" exist. The others are the plan.
 
 ## Crates
 
 | Crate | Responsibility |
 |-------|----------------|
-| `ox-fs` | Open and save, encoding, line endings, atomic write, file watcher |
+| `ox-fs` (built) | Decode and encode text with the encoding, byte order mark, and line ending. Atomic write. The file watcher is not built. |
 | `ox-index` | Workspace file list, frecency store, fuzzy matcher |
 | `ox-search` | Full-text search, streaming |
 | `ox-pkg` | Registry fetch, verify, install, enable and disable, lazy assets |
 | `ox-session` | Hot exit: tabs, pins, groups, panes, unsaved buffer snapshots |
-| `ox-settings` | Layered JSONC settings |
-| `ox-commands` | Command registry, keymap resolver |
+| `ox-settings` (built) | Parse JSONC, and merge settings layers |
+| `ox-commands` | Command registry, keymap resolver. In M0 these are in the frontend (`src/ui/commands`, `src/ui/keymap`). |
 
 ## Libraries
 
@@ -27,7 +27,8 @@ export), `trash` (delete to trash), minisign (signing).
 
 ## Protocols
 
-- **Tauri commands** (`invoke`): the frontend calls the core.
+- **Tauri commands** (`invoke`): the frontend calls the core. The app crate (`src/tauri/src/lib.rs`) has three: `open_file`, `save_file`, and `load_config`.
+- **Capabilities:** `src/tauri/capabilities/default.json` lists what the webview may call. It allows the dialogs, and the window title and destroy calls.
 - **Tauri `Channel`**: the core streams results to the frontend.
 - **`oxpkg://`**: a custom protocol that serves installed pack files (`.wasm`, `.scm`, CSS) to the webview, with a strict content security policy. `wasm-unsafe-eval` is allowed. `unsafe-eval` is not.
 

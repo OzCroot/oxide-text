@@ -1,13 +1,14 @@
 # Deployment
 
-The project has no pipeline yet. This file records the decided approach.
 See [ADR 0008](../adr/0008-distribution-with-tauri-bundler-and-updater.md).
 
 ## Build Pipeline
 
 - The Tauri bundler builds installers for Windows, macOS, and Linux.
-- CI runs the tests on all three systems from milestone M0.
-- The installer size target is 10 MB or less on every system.
+- The GitHub Actions workflow `.github/workflows/ci.yml` runs on Linux, macOS, and Windows. Each job runs the type check, the Vitest tests, the Rust tests, the installer build, and the size check.
+- The size check is `src/scripts/check-installer-size.mjs`. It fails if an installer is over 10 MiB.
+- The Linux `.deb` built on 2026-11-10 is 1.88 MiB. The macOS and Windows installers are not measured yet. The workflow has not run on GitHub yet.
+- The release profile uses `opt-level = "s"`, LTO, `panic = "abort"`, and strips symbols.
 
 ## Updates
 

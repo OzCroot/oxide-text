@@ -1,7 +1,7 @@
 # Backend Coding Standards
 
-The project has no Rust code yet. This file records the decided rules. The
-team sets the Rust edition, the linter, and the formatter in milestone M0.
+This file records the rules that the code follows. The crates use the Rust
+2021 edition. The project has no `clippy` or `rustfmt` configuration yet.
 
 ## Language & Framework
 
@@ -22,13 +22,13 @@ team sets the Rust edition, the linter, and the formatter in milestone M0.
 ## Project Structure
 
 ```
-src-tauri/
+src/tauri/
 └── crates/
-    ├── ox-fs/          # open and save, encoding, line endings, watcher
+    ├── ox-fs/          # open and save, encoding, line endings (built). The watcher is not built.
     ├── ox-index/       # workspace file list, frecency, fuzzy matcher
     ├── ox-search/      # full-text search, streaming
     ├── ox-pkg/         # registry, verify, install, lazy assets
     ├── ox-session/     # hot exit: tabs, pins, groups, panes, unsaved buffers
-    ├── ox-settings/    # layered JSONC settings
-    └── ox-commands/    # command registry, keymap resolver
+    ├── ox-settings/    # layered JSONC settings (built)
+    └── ox-commands/    # command registry, keymap resolver (M0: in the frontend)
 ```

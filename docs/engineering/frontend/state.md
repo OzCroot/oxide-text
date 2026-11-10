@@ -1,16 +1,17 @@
 # Frontend State
 
-The project has no code yet. This file records the decided design. The
-session model is in [the plan, section 6.3](../../../plan/OXIDE-TEXT-PLAN.md#63-model-session-json-owned-by-ox-session).
+This file records who owns each piece of state. M0 built the tab list and the
+editor state. The session model below is the plan, and is not built. See [the plan, section 6.3](../../../plan/OXIDE-TEXT-PLAN.md#63-model-session-json-owned-by-ox-session).
 
 ## Who owns what
 
 | State | Owner | Notes |
 |-------|-------|-------|
 | Text of an open file | CodeMirror state, in the webview | Sent to Rust on save and for snapshots |
-| Windows, panes, tabs, pins, groups | `ox-session` (Rust), as session JSON | Snapshots are debounced at about 2 s |
-| Settings | `ox-settings` (Rust), layered JSONC | See [configuration](../../operations/configuration.md) |
-| Keybindings | `ox-commands` (Rust), layered | Maps keys to command ids |
+| Windows, panes, tabs, pins, groups | `ox-session` (Rust), as session JSON. Not built. | Snapshots are debounced at about 2 s |
+| Open tabs (M0) | React state in `workspace.ts`. A tab has an id, a path, a title, the encoding, the byte order mark, the line ending, and the dirty and plain flags. | The text is not in React state |
+| Settings | `ox-settings` (Rust), layered JSONC. Read once at startup. | See [configuration](../../operations/configuration.md) |
+| Keybindings | The keymap resolver in the frontend (M0), layered | Maps keys to command ids. The plan moves it to `ox-commands`. |
 | Installed packs | `ox-pkg` (Rust) | Files under `<appdata>/packages/` |
 
 ## Session model

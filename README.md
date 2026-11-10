@@ -2,7 +2,7 @@
 
 oxide-text is an open source text editor for Markdown documents. It supports many tabs, arranged in named groups. It also highlights a wide range of code syntaxes.
 
-> **Status: planning.** The project has no code yet. The design is in [`plan/OXIDE-TEXT-PLAN.md`](plan/OXIDE-TEXT-PLAN.md). The features below describe the target, not the current state.
+> **Status: early development.** Milestone M0 (the skeleton) is built. Most features below are still planned. The design is in [`plan/OXIDE-TEXT-PLAN.md`](plan/OXIDE-TEXT-PLAN.md). The features below describe the target, not the current state.
 
 ## Features
 
@@ -81,6 +81,20 @@ A single launcher, opened with `Ctrl+P`, finds files, commands, headings, tabs, 
 | Syntax highlighting | web-tree-sitter |
 
 See the [plan](plan/OXIDE-TEXT-PLAN.md) for the reasons behind each choice.
+
+## Development
+
+Prerequisites: Rust with the [Tauri 2 prerequisites](https://v2.tauri.app/start/prerequisites/), Node.js 24, and pnpm 10.
+
+```bash
+cd src
+pnpm install
+pnpm tauri dev      # run the app
+pnpm test           # frontend tests
+cargo test --workspace --manifest-path tauri/Cargo.toml
+```
+
+All source and project files are in `src/`: `src/ui` for the React app, `src/tauri` for the Rust core, and `package.json` and the tool config. See [getting started](docs/operations/getting-started.md).
 
 ## Roadmap
 
