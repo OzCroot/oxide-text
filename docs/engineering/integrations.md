@@ -1,29 +1,14 @@
 # Third-Party Integrations
 
-<!-- SCAFFOLD: Document external tools and services connected to this project -->
-
-## Design Tools
-
-<!-- SCAFFOLD: Replace or remove this section -->
-
-| Tool | URL / Access |
-|------|-------------|
-| {{DESIGN_TOOL}} | <!-- for example, Figma project URL, Sketch Cloud link --> |
+oxide-text has no server. It connects to the services below.
 
 ## APIs & Services
 
-<!-- SCAFFOLD: List external APIs the project consumes -->
-
 | Service | Purpose | Docs |
 |---------|---------|------|
-| <!-- for example, Stripe --> | <!-- for example, Payment processing --> | <!-- link --> |
+| Package registry | Serves the signed `index.json` and the packs. Host not chosen. | [ADR 0007](../adr/0007-signed-static-package-registry.md) |
+| Update feed | Serves signed application updates | [ADR 0008](../adr/0008-distribution-with-tauri-bundler-and-updater.md) |
+| Upstream tree-sitter grammars | The source that `tools/oxpkg` builds language packs from | [the plan, section 5.5](../../plan/OXIDE-TEXT-PLAN.md#55-registry) |
 
-## MCP Servers
-
-<!-- SCAFFOLD: List any Model Context Protocol servers configured for agent use. -->
-
-| Server | Purpose | Auth |
-|--------|---------|------|
-| <!-- for example, Figma MCP --> | <!-- for example, Design-to-code generation --> | <!-- for example, API key in .env --> |
-
-> Remove sections that do not apply.
+The editor also starts a formatter that the user installs, when the user
+sets one. See [ADR 0005](../adr/0005-formatters-wasm-with-external-option.md).

@@ -139,18 +139,24 @@ Before proceeding, confirm you can answer:
 
 ### Tasks
 
-- [ ] Populate `engineering/architecture.md`: the tech stack table, the build commands, a high-level architecture summary, and the code style. Link to `engineering/frontend/architecture.md` and `engineering/backend/architecture.md` for detail
-- [ ] Populate `operations/getting-started.md` — prerequisites, install steps, dev server commands, access URLs, project structure
-- [ ] Populate `operations/environments.md` — dev/prod URLs, environment variables, database config, secrets approach
-- [ ] Populate `operations/deployment.md` — build pipeline steps, output structure, hosting platform
-- [ ] Populate `operations/configuration.md` — actual config files, environment variable names, entry point bootstrap code
-- [ ] Populate `engineering/integrations.md` — any third-party APIs, design tools, MCP servers; delete the file if none exist
+- [x] Populate `engineering/architecture.md`: the tech stack table, the build commands, a high-level architecture summary, and the code style. Link to `engineering/frontend/architecture.md` and `engineering/backend/architecture.md` for detail
+- [x] Populate `operations/getting-started.md` — prerequisites, install steps, dev server commands, access URLs, project structure
+- [x] Populate `operations/environments.md` — dev/prod URLs, environment variables, database config, secrets approach
+- [x] Populate `operations/deployment.md` — build pipeline steps, output structure, hosting platform
+- [x] Populate `operations/configuration.md` — actual config files, environment variable names, entry point bootstrap code
+- [x] Populate `engineering/integrations.md` — any third-party APIs, design tools, MCP servers; delete the file if none exist
+
+### Milestone 3 notes (completed 2026-11-10)
+
+- The project has no code, so these files record the decided design. They say "not set" or "not yet available" where the plan has no answer. They do not invent commands, versions, or URLs.
+- `integrations.md` is kept. It lists the registry, the update feed, and the upstream grammars. The design-tool and MCP sections are removed.
+- Repeat this milestone's checks when M0 creates the first code.
 
 ### Checkpoint
 
-- [ ] Every `{{PLACEHOLDER}}` in the files above is replaced with a real value
-- [ ] Every `<!-- SCAFFOLD -->` comment is removed from completed files
-- [ ] Files with no relevant content have been deleted (for example, `integrations.md` if no integrations exist)
+- [x] Every `{{PLACEHOLDER}}` in the files above is replaced with a real value
+- [x] Every `<!-- SCAFFOLD -->` comment is removed from completed files
+- [x] Files with no relevant content have been deleted (for example, `integrations.md` if no integrations exist)
 
 ---
 

@@ -1,44 +1,27 @@
 # Deployment
 
+The project has no pipeline yet. This file records the decided approach.
+See [ADR 0008](../adr/0008-distribution-with-tauri-bundler-and-updater.md).
+
 ## Build Pipeline
 
-### Frontend
+- The Tauri bundler builds installers for Windows, macOS, and Linux.
+- CI runs the tests on all three systems from milestone M0.
+- The installer size target is 10 MB or less on every system.
 
-<!-- SCAFFOLD: Replace with your frontend build steps -->
+## Updates
 
-```bash
-{{PACKAGE_MANAGER}} run build
-```
+- The application updates itself with `tauri-plugin-updater`.
+- Update releases are signed.
+- The team has not chosen the host of the update feed.
 
-Steps:
-1. Check types
-2. Bundle or compile the code into the production output directory
+## Package registry
 
-### Backend
-
-<!-- SCAFFOLD: Replace with your backend build/publish command -->
-
-```bash
-# for example, dotnet publish -c Release, npm run build:server
-```
-
-## Output
-
-<!-- SCAFFOLD: Replace with your build output structure -->
-
-```
-dist/
-├── index.js          # Entry script (hashed)
-├── styles.css        # Main stylesheet (hashed)
-├── chunks/           # Code-split modules
-└── assets/           # Images, fonts
-```
+The registry is a static, signed `index.json`. The host is open question 5
+in [the plan](../../plan/OXIDE-TEXT-PLAN.md#10-open-questions-please-decide).
+See [ADR 0007](../adr/0007-signed-static-package-registry.md).
 
 ## Hosting
 
-<!-- SCAFFOLD: Replace with your hosting details -->
-
-- **Platform**: <!-- for example, Azure App Service, Vercel, AWS, Docker -->
-- **Runtime**: {{BACKEND_FRAMEWORK}}
-- **Database**: {{DATABASE}}
-- **CDN**: <!-- if applicable -->
+- **Platform**: not chosen
+- **Database**: none

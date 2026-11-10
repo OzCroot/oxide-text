@@ -1,62 +1,35 @@
 # Getting Started
 
+The project has no code yet. This file records the planned setup. The team
+confirms each step in milestone M0, and updates this file then.
+
 ## Prerequisites
 
-<!-- SCAFFOLD: List required tools and minimum versions -->
-
-- **Node.js** >= {{NODE_VERSION}}
-- **{{BACKEND_FRAMEWORK}}** SDK
-- **{{DATABASE}}** (local or remote instance)
+- **Rust**, with the Tauri 2 prerequisites for your operating system
+- **Node.js**, for the Svelte frontend. The minimum version is not set.
+- No database is needed.
 
 ## First Run
 
-### 1. Install frontend dependencies
-
-```bash
-{{PACKAGE_MANAGER}} install
-```
-
-### 2. Start the backend
-
-<!-- SCAFFOLD: Replace with your backend start command -->
-
-```bash
-# for example, dotnet run, npm run server, python manage.py runserver
-```
-
-### 3. Start the frontend dev server
-
-```bash
-{{PACKAGE_MANAGER}} run dev
-```
-
-### 4. Access the application
-
-<!-- SCAFFOLD: Replace with your actual URLs -->
-
-| Service | URL |
-|---------|-----|
-| Application | https://localhost:{{PORT}} |
-| API | https://localhost:{{PORT}}/api |
-| CMS admin | https://localhost:{{PORT}}/admin |
-
-> Remove CMS row if not applicable.
+Not yet available. The repository has no `package.json` or `Cargo.toml`.
+The package manager is not chosen.
 
 ## Project Structure at a Glance
 
-<!-- SCAFFOLD: Replace with your actual top-level directory layout -->
+The planned layout, from [the plan](../../plan/OXIDE-TEXT-PLAN.md#2-architecture). Only `docs/` and `plan/` exist now.
 
 ```
-src/                # Application source code
-├── frontend/       # Frontend source (components, styles, services)
-├── backend/        # Backend source (controllers, models, services)
-└── shared/         # Shared types, utilities
-public/             # Static assets
-docs/              # agent knowledge base
+src-tauri/            # Rust app, with crates/ (ox-fs, ox-index, ox-search, ox-pkg, ox-session, ox-settings)
+ui/                   # Svelte app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
+  editor/commands/    # one folder per editing feature
+packs/                # first-party packs, one folder each (lang-rust/, keymap-sublime/)
+tools/oxpkg/          # CLI: build, lint, sign, publish packs
+docs/                 # agent knowledge base
+plan/                 # the design plan
 ```
 
 ## Next Steps
 
 - Read [architecture.md](../engineering/architecture.md) for tech stack details
 - Check [../engineering/standards/](../engineering/standards/) for code conventions
-- Browse [../engineering/frontend/](../engineering/frontend/) or [../engineering/backend/](../engineering/backend/) for team-specific patterns
+- Read [the plan](../../plan/OXIDE-TEXT-PLAN.md), section 8, for the milestones

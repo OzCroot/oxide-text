@@ -1,51 +1,51 @@
-# Project Overview
+# Architecture
 
-<!-- SCAFFOLD: Replace with your project description and tech stack -->
+oxide-text — an open source text editor for Markdown documents, with
+multi-tab, multi-group editing and optional language packs.
 
-{{PROJECT_NAME}} — brief one-line project description.
+The project has no code yet. This file records the decided design. The
+full design is in [the plan](../../plan/OXIDE-TEXT-PLAN.md). Each choice has
+an [ADR](../adr/). Several ADRs are still `proposed`.
 
 ## Tech Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Backend runtime | {{BACKEND_FRAMEWORK}} | x.x |
-| Backend language | {{BACKEND_LANGUAGE}} | x.x |
-| Frontend language | TypeScript | x.x |
-| Frontend framework | {{FRONTEND_FRAMEWORK}} | x.x |
-| Bundler | {{BUNDLER}} | x.x |
-| Styles | {{CSS_APPROACH}} | x.x |
-| Linting | ESLint | x.x |
-| Formatting | Prettier | x.x |
-| Database | {{DATABASE}} | x.x |
-| CMS | {{CMS_PLATFORM}} | x.x |
+| Layer | Technology | Version | Decision |
+|-------|-----------|---------|----------|
+| Application shell | Tauri | 2 | [ADR 0001](../adr/0001-use-tauri-with-rust-core.md) |
+| Core language | Rust | not set | [ADR 0001](../adr/0001-use-tauri-with-rust-core.md) |
+| Frontend language | TypeScript | not set | [ADR 0002](../adr/0002-use-svelte-5-typescript-vite.md) |
+| Frontend framework | Svelte | 5 | [ADR 0002](../adr/0002-use-svelte-5-typescript-vite.md) |
+| Bundler | Vite | not set | [ADR 0002](../adr/0002-use-svelte-5-typescript-vite.md) |
+| Editor | CodeMirror | 6 | [ADR 0003](../adr/0003-use-codemirror-6-as-the-editor.md) |
+| Code highlighting | web-tree-sitter, in packs | not set | [ADR 0004](../adr/0004-language-packs-with-tree-sitter.md) |
+| Code formatting | WASM in packs, or an external tool | — | [ADR 0005](../adr/0005-formatters-wasm-with-external-option.md) |
+| Markdown preview | markdown-it, DOMPurify | not set | [ADR 0006](../adr/0006-markdown-rendering-stack.md) |
+| Markdown export | comrak, ammonia (Rust) | not set | [ADR 0006](../adr/0006-markdown-rendering-stack.md) |
+| Fuzzy matching | nucleo (Rust) | not set | the plan, section 1 |
+| Workspace search | `ignore` and `grep-searcher` crates | not set | the plan, section 1 |
+| File watching | `notify` crate | not set | the plan, section 1 |
+| Encoding | `encoding_rs`, `chardetng` | not set | the plan, section 1 |
+| Package signing | minisign (ed25519) | — | [ADR 0007](../adr/0007-signed-static-package-registry.md) |
+| Database | None | — | — |
+| CMS | None | — | — |
 
-> Remove rows that do not apply. For example, remove the CMS row for a non-CMS project.
+The team sets exact versions when it creates `package.json` and `Cargo.toml`.
+The package manager is not chosen.
 
 ## Build Commands
 
-<!-- SCAFFOLD: Replace with your actual commands -->
-
-```bash
-{{PACKAGE_MANAGER}} run dev       # Frontend dev server
-{{PACKAGE_MANAGER}} run build     # Production build
-{{PACKAGE_MANAGER}} run preview   # Preview production build locally
-```
+The project has no build scripts yet. The team defines them in milestone M0.
+Tauri provides the `dev` and `build` commands for the shell.
 
 ## Architecture Summary
 
-<!-- SCAFFOLD: Add 2 to 4 bullets that describe the high-level architecture. -->
-
-- **Frontend**: <!-- for example, React SPA, Vue components, vanilla TS component system -->
-- **Backend**: <!-- for example, ASP.NET Core API, Express.js, Django REST -->
-- **CMS**: <!-- for example, Umbraco backoffice, WordPress admin, or remove this line -->
-- **Standards**: Coding conventions for all teams. See [./standards/](./standards/)
+- **Frontend**: a Svelte app in `ui/`. It holds the tab strip, panes, launcher, editor, and preview. Text buffers live here, in the CodeMirror state.
+- **Backend**: a Rust core in `src-tauri/`, split into crates: `ox-fs`, `ox-index`, `ox-search`, `ox-pkg`, `ox-session`, `ox-settings`, `ox-commands`.
+- **Commands**: every user action is a command with a string id. The menu, keymap, launcher, and tab menus all use the same registry. See [ADR 0009](../adr/0009-command-registry-and-configurable-keymap.md).
+- **Packs**: a pack host loads only when a language pack is installed. The host serves pack files through the custom `oxpkg://` protocol.
+- **Standards**: coding conventions for all teams. See [./standards/](./standards/)
 
 ## Code Style
 
-<!-- SCAFFOLD: List the key formatting decisions that apply across the project. -->
-
-- Indent: 2 spaces
-- Line width: 100 characters
-- Quotes: single
-- Semicolons: <!-- yes / no -->
-- TypeScript strict mode: enabled
+The team has not set a linter or a formatter. The language rules for
+documents are in [standards/language.md](./standards/language.md).

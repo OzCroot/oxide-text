@@ -1,37 +1,27 @@
 # Environments
 
+oxide-text is a desktop application. It has no server and no database.
+
 ## Development
 
-<!-- SCAFFOLD: Replace with your dev environment URLs and config -->
-
-| Service | URL |
-|---------|-----|
-| Backend | https://localhost:{{BACKEND_PORT}} |
-| Frontend dev server | https://localhost:{{FRONTEND_PORT}} |
-| CMS admin | https://localhost:{{BACKEND_PORT}}/admin |
-
-> Remove CMS row if not applicable.
-
-- Environment variable: `{{ENV_VAR_NAME}}` = `Development`
-- Config overrides in `{{DEV_CONFIG_FILE}}`
+Not yet set up. The team defines the dev workflow in milestone M0.
 
 ## Production
 
-<!-- SCAFFOLD: Replace with your production environment details -->
+Users install the application from a signed installer. See
+[deployment.md](./deployment.md).
 
-- Environment variable: `{{ENV_VAR_NAME}}` = `Production`
-- Config in `{{PROD_CONFIG_FILE}}`
+## Data on the user's machine
 
-## Database
+The application stores its data in the application data folder
+(`<appdata>`):
 
-<!-- SCAFFOLD: Replace with your database details -->
-
-- **Engine**: {{DATABASE}}
-- **Host**: <!-- local / cloud provider -->
-- **Connection**: <!-- how connection is configured -->
+| Path | Content |
+|------|---------|
+| `<appdata>/packages/<id>/<version>/` | Installed packs |
+| `<appdata>/sessions/<workspace-hash>/` | Hot-exit snapshots of tabs, groups, and unsaved buffers |
 
 ## Secrets
 
-- Manage connection strings and API keys with environment variables or a secret manager
-- Never commit secrets to the repository
-- Use config files that Git ignores for local overrides
+- The repository must not hold secrets. This includes the signing keys for installers and packs.
+- The team has not chosen where to keep signing keys. See [deployment.md](./deployment.md).
