@@ -128,4 +128,4 @@ An x-large component is a page-level or application-level feature that:
 - **Code review:** larger components need closer review of accessibility, performance, and responsive behaviour
 - **CMS modelling:** this project has no CMS, so ignore the CMS rows and traits in this file.
 - **Testing:** small components may need only visual review. Large components need interactive and cross-breakpoint testing.
-- **Component architecture:** see [frontend components](../frontend/components.md) for build patterns at each tier
+- **Component architecture:** see [frontend architecture](../frontend/architecture.md)

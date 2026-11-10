@@ -1,36 +1,40 @@
-# State Management
+# Frontend State
 
-## Approach
+The project has no code yet. This file records the decided design. The
+session model is in [the plan, section 6.3](../../../plan/OXIDE-TEXT-PLAN.md#63-model-session-json-owned-by-ox-session).
 
-<!-- SCAFFOLD: Describe the state management strategy. -->
+## Who owns what
 
-Options:
-- Component-local state (framework built-in)
-- Global store (Redux, Pinia, Zustand, Svelte stores)
-- CSS class state (toggling classes for UI state)
-- URL/query param state
-- Server state (React Query, SWR)
+| State | Owner | Notes |
+|-------|-------|-------|
+| Text of an open file | CodeMirror state, in the webview | Sent to Rust on save and for snapshots |
+| Windows, panes, tabs, pins, groups | `ox-session` (Rust), as session JSON | Snapshots are debounced at about 2 s |
+| Settings | `ox-settings` (Rust), layered JSONC | See [configuration](../../operations/configuration.md) |
+| Keybindings | `ox-commands` (Rust), layered | Maps keys to command ids |
+| Installed packs | `ox-pkg` (Rust) | Files under `<appdata>/packages/` |
 
-## UI State
+## Session model
 
-<!-- SCAFFOLD: Describe how the code manages UI states (loading, active, disabled). -->
+```ts
+Window { panes: Pane[], layout: SplitTree, activePane }
+Pane   { id, tabs: TabRef[], groups: Group[], activeTab, previewTab?: TabRef }
+TabRef { id, uri, kind: "text"|"markdown-preview"|"image"|"packages"|"results"|"settings",
+         pinned: boolean, groupId?: string, viewState: {mode, scroll, selections} }
+Group  { id, name, color, collapsed }
+```
 
-Common UI states to track:
+## Invariants
 
-| State | Purpose |
-|-------|---------|
-| Loading | The code fetches data |
-| Loaded | The data is ready |
-| Active | The element is selected or open |
-| Disabled | The element is not interactive |
-| Visible | The element is shown |
-| Hidden | The element is hidden |
-| Error | The operation failed |
+Tests must check these:
 
-## Application State
+- Pinned tabs come first in a strip.
+- The tabs of a group are next to each other.
+- `previewTab` is never pinned or grouped.
+- A tab belongs to at most one group.
+- A pinned tab is not in a group.
 
-<!-- SCAFFOLD: Describe how the code manages global or shared state. -->
+## Hot exit
 
-## Server State
-
-<!-- SCAFFOLD: Describe how the code caches and manages asynchronous data from APIs, if applicable. -->
+On quit, the session is written to `<appdata>/sessions/<workspace-hash>/`.
+Each unsaved buffer is stored with the hash of its base file. On restore,
+this hash shows whether the file changed outside the editor.

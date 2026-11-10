@@ -2,53 +2,48 @@
 
 ## Overview
 
-<!-- SCAFFOLD: Describe the frontend architecture in 1-2 sentences. -->
-
-{{FRONTEND_FRAMEWORK}}-based frontend with TypeScript.
+A Svelte 5 frontend in TypeScript, in a Tauri webview. The project has no
+frontend code yet. This file records the decided design. See
+[ADR 0002](../../adr/0002-use-svelte-5-typescript-vite.md) and
+[the plan, section 2](../../../plan/OXIDE-TEXT-PLAN.md#2-architecture).
 
 ## Directory Structure
 
-<!-- SCAFFOLD: Replace this section with the actual frontend directory layout. -->
+The planned layout of `ui/`:
 
 ```
-src/
-├── main.ts                  # Entry point
-├── components/              # UI components
-├── services/                # Service layer (API clients, singletons)
-├── models/                  # Type definitions, enums, constants
-├── styles/                  # Global styles, design tokens
-├── utils/                   # Shared utilities
-├── assets/                  # Static assets (fonts, images)
-└── types/                   # Ambient TypeScript declarations
+ui/
+├── shell/          # tab strip (pins, groups), panes, sidebar, status bar
+├── launcher/       # the Ctrl+P overlay and its modes
+├── editor/         # CodeMirror 6 setup
+│   └── commands/   # one folder per editing feature (multicursor/, lines/, comment/, folding/)
+├── markdown/       # view modes, preview, outline
+├── tabs/           # tab, pin, and group logic
+└── packages/       # the Packages view and the pack host
 ```
-
-## Component System
-
-<!-- SCAFFOLD: Describe how components are structured and how they render. -->
-
-1. How components are discovered / registered
-2. How components receive data (props, context, DI)
-3. Component lifecycle (mount, update, destroy)
-
-## Service Layer
-
-<!-- SCAFFOLD: Describe shared services and how the code accesses them. -->
-
-Singleton or injected services for shared infrastructure:
-
-- **API client** — HTTP communication
-- **State store** — application state (if applicable)
 
 ## Data Flow
 
-<!-- SCAFFOLD: Describe how data flows from the backend to the UI. -->
-
 ```
-Backend API / CMS → Data layer → Components → DOM
+UI (Svelte) ── invoke() commands ──▶ Rust core
+UI (Svelte) ◀── Channel<T> streams ── Rust core   (launcher results, search)
+
+Editor (CodeMirror 6)
+  ├─ Markdown mode, built in: source, live, preview, split
+  └─ pack host, only if a pack is installed: highlight and format
+Preview: markdown-it, DOMPurify, scroll sync through data-line attributes
 ```
 
-## Style Architecture
+## Rules
 
-<!-- SCAFFOLD: Describe the CSS strategy. -->
+- Text buffers live in the CodeMirror state. The Rust core receives the text only on save and for session snapshots.
+- Every user action is a command with a string id. The menu, keymap, launcher, and tab menus all dispatch through the command registry.
+- The launcher renders results that the Rust core streams. It caps the list at 200 rows and virtualises it.
+- The pack host loads only when a language pack is installed. It fetches pack files through the `oxpkg://` protocol.
+- Markdown views: source, live, preview, split. Each tab has its own mode.
 
-See [styles.md](./styles.md) and [../standards/frontend.md](../standards/frontend.md) for conventions.
+## Related
+
+- [state.md](./state.md) — what state exists and who owns it
+- [testing.md](./testing.md) — frontend tests
+- [../standards/frontend.md](../standards/frontend.md) — frontend rules

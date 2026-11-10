@@ -182,15 +182,15 @@ docs/
 1. Steps above, then:
 2. [engineering/standards/frontend.md](./engineering/standards/frontend.md) — language and framework rules
 3. [engineering/frontend/architecture.md](./engineering/frontend/architecture.md) — how the frontend works
-4. [engineering/frontend/components.md](./engineering/frontend/components.md) — creating components
+4. [engineering/frontend/state.md](./engineering/frontend/state.md) — what state exists and who owns it
 5. Browse remaining `engineering/frontend/` files as needed
 
 ### Backend Developer
 
 1. Steps above, then:
 2. [engineering/standards/backend.md](./engineering/standards/backend.md) — language and framework rules
-3. [engineering/backend/architecture.md](./engineering/backend/architecture.md) — project structure, DI, middleware
-4. [engineering/backend/controllers.md](./engineering/backend/controllers.md) — API patterns
+3. [engineering/backend/architecture.md](./engineering/backend/architecture.md) — crates, libraries, and protocols
+4. [engineering/backend/testing.md](./engineering/backend/testing.md) — backend tests
 
 ### Picking up a new feature
 

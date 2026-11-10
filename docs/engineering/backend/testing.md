@@ -1,39 +1,11 @@
 # Backend Testing
 
-## Current Status
+The project has no tests yet. This file records the decided approach.
 
-<!-- SCAFFOLD: Describe the current testing setup, or note that it is pending. -->
-
-No backend testing framework is currently configured.
-
-## Recommended Setup
-
-<!-- SCAFFOLD: Replace this section with the chosen testing framework. -->
-
-Options:
-- **xUnit / NUnit** — .NET test frameworks
-- **Jest / Vitest** — Node.js test runners
-- **pytest** — Python testing
-- **Supertest / Pactum** — API integration testing
-
-### Test Project Structure
-
-<!-- SCAFFOLD: Replace this section with the test directory layout. -->
-
-```
-tests/
-├── controllers/
-│   └── ItemsController.test.ts
-├── services/
-│   └── ItemService.test.ts
-└── helpers/
-    └── testUtils.ts
-```
-
-## What to Test
-
-- API endpoint request and response mapping
-- Service business logic
-- Data model validation
-- Database queries (with test database or mocks)
-- Middleware behavior
+- **Unit tests:** Rust tests in each crate.
+- **Property tests:** `proptest`, for the `ox-session`, `ox-index`, and `ox-pkg` crates. The session tests check the tab invariants in [../frontend/state.md](../frontend/state.md#invariants).
+- **Hot exit:** a kill-and-restore test must lose nothing.
+- **Packs:** an install, highlight, and uninstall test needs no restart. A pack with a bad signature must fail to install.
+- **Formatters:** a failed or timed-out external formatter must leave the buffer unchanged.
+- **Performance:** benchmarks in CI with a fixture repository.
+- **CI:** runs on Windows, macOS, and Linux from milestone M0.

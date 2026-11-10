@@ -1,46 +1,12 @@
 # Frontend Testing
 
-## Current Status
+The project has no tests yet. This file records the decided approach. See
+[the plan, section 8](../../../plan/OXIDE-TEXT-PLAN.md#8-milestones).
 
-<!-- SCAFFOLD: Describe the current testing setup, or note that it is pending. -->
-
-No frontend testing framework is currently configured.
-
-## Recommended Setup
-
-<!-- SCAFFOLD: Replace this section with the chosen testing framework. -->
-
-Options:
-- **Vitest** — fast, Vite-native test runner
-- **Jest** — widely adopted, rich ecosystem
-- **Playwright / Cypress** — E2E testing
-
-### Test File Convention
-
-<!-- SCAFFOLD: Define the location of test files. -->
-
-```
-src/components/ComponentName/
-├── ComponentName.tsx
-├── ComponentName.styles.css
-└── ComponentName.test.ts
-```
-
-### Scripts
-
-```json
-{
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest"
-  }
-}
-```
-
-## What to Test
-
-- Component rendering and DOM output
-- User interactions (click, input, submit)
-- State changes and side effects
-- Service and utility logic
-- API integration (mocked)
+- **Unit tests:** Vitest, for the UI logic.
+- **End-to-end tests:** WebdriverIO with `tauri-driver`, on Windows and Linux. Each launcher mode has an end-to-end test.
+- **macOS:** it has no WebDriver for WKWebView. Test by hand, and with Playwright on component builds.
+- **Performance:** benchmarks in CI with a fixture repository. The launcher target is 16 ms or less per keystroke on a repository of 100,000 files.
+- **Sanitiser:** tests must show that the preview removes unsafe HTML.
+- **Keymap:** a test must check the default keymap for duplicate bindings.
+- **Tab invariants:** see [state.md](./state.md#invariants).

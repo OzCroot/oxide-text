@@ -2,50 +2,40 @@
 
 ## Overview
 
-<!-- SCAFFOLD: Describe the backend in 1-2 sentences. -->
+A Rust core in `src-tauri/`, inside a Tauri 2 shell. The project has no
+code yet. This file records the decided design. See
+[ADR 0001](../../adr/0001-use-tauri-with-rust-core.md).
 
-{{BACKEND_FRAMEWORK}} application with {{BACKEND_LANGUAGE}}.
+## Crates
 
-## Project Structure
+| Crate | Responsibility |
+|-------|----------------|
+| `ox-fs` | Open and save, encoding, line endings, atomic write, file watcher |
+| `ox-index` | Workspace file list, frecency store, fuzzy matcher |
+| `ox-search` | Full-text search, streaming |
+| `ox-pkg` | Registry fetch, verify, install, enable and disable, lazy assets |
+| `ox-session` | Hot exit: tabs, pins, groups, panes, unsaved buffer snapshots |
+| `ox-settings` | Layered JSONC settings |
+| `ox-commands` | Command registry, keymap resolver |
 
-<!-- SCAFFOLD: Replace this section with the actual backend directory layout. -->
+## Libraries
 
-```
-src/
-├── Program.cs / index.ts / app.py    # Entry point
-├── controllers/                       # Route handlers
-├── services/                          # Business logic
-├── models/                            # Data models, DTOs
-├── middleware/                         # Request pipeline
-├── config/                            # Configuration
-└── tests/                             # Test files
-```
+The plan names these: `nucleo` (fuzzy matching), `ignore` and
+`grep-searcher` (workspace walk and search), `notify` (file watching),
+`encoding_rs` and `chardetng` (encoding), `comrak` and `ammonia` (Markdown
+export), `trash` (delete to trash), minisign (signing).
 
-## Middleware Pipeline
+## Protocols
 
-<!-- SCAFFOLD: Describe the request processing pipeline -->
+- **Tauri commands** (`invoke`): the frontend calls the core.
+- **Tauri `Channel`**: the core streams results to the frontend.
+- **`oxpkg://`**: a custom protocol that serves installed pack files (`.wasm`, `.scm`, CSS) to the webview, with a strict content security policy. `wasm-unsafe-eval` is allowed. `unsafe-eval` is not.
 
-1. Authentication and authorization
-2. Request logging
-3. Static file serving
-4. Routing
-5. Error handling
+## Logging, middleware, and DI
 
-## Dependency Injection
+Not set.
 
-<!-- SCAFFOLD: Describe how the code registers and injects services. -->
+## Related
 
-## Logging
-
-<!-- SCAFFOLD: Describe the logging setup. -->
-
-- Log levels: Debug, Info, Warning, Error
-- Output: <!-- for example, console, file, cloud service -->
-
-## Server Configuration
-
-<!-- SCAFFOLD: Describe server profiles and ports -->
-
-| Profile | URL | Port |
-|---------|-----|------|
-| Development | https://localhost:{{PORT}} | {{PORT}} |
+- [testing.md](./testing.md) — backend tests
+- [../standards/backend.md](../standards/backend.md) — backend rules

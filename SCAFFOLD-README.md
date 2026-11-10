@@ -197,48 +197,56 @@ Before proceeding, confirm you can answer:
 
 ### Frontend tasks
 
-- [ ] Populate `engineering/frontend/architecture.md` — real directory layout, component system, service layer, data flow diagram
-- [ ] Populate `engineering/frontend/components.md` — actual component file structure, boilerplate from a real component, conventions observed in the codebase
-- [ ] Populate `engineering/frontend/styles.md` — actual selector strategy, design tokens (from CSS vars or theme config), responsive breakpoints, a real styled component example
-- [ ] Populate `engineering/frontend/animations.md` — actual animation approach; **delete this file** if the project has no animation patterns
-- [ ] Populate `engineering/frontend/services.md` — actual services found in the codebase, their locations and responsibilities
-- [ ] Populate `engineering/frontend/events.md` — actual event system; **delete this file** if the project uses standard framework events only (React props, Vue emits) with no custom event layer
-- [ ] Populate `engineering/frontend/state.md` — actual state management approach (store library, context, URL state, and so on)
-- [ ] Populate `engineering/frontend/build.md` — actual bundler config, entry points, output paths, path aliases, dev server setup
-- [ ] Populate `engineering/frontend/testing.md` — actual test framework and conventions; keep as a placeholder with recommendation if no tests exist yet
-- [ ] **Delete the entire `engineering/frontend/` directory** if the project has no frontend (for example, API-only service)
+- [x] Populate `engineering/frontend/architecture.md` — real directory layout, component system, service layer, data flow diagram
+- [x] Populate `engineering/frontend/components.md` — actual component file structure, boilerplate from a real component, conventions observed in the codebase
+- [x] Populate `engineering/frontend/styles.md` — actual selector strategy, design tokens (from CSS vars or theme config), responsive breakpoints, a real styled component example
+- [x] Populate `engineering/frontend/animations.md` — actual animation approach; **delete this file** if the project has no animation patterns
+- [x] Populate `engineering/frontend/services.md` — actual services found in the codebase, their locations and responsibilities
+- [x] Populate `engineering/frontend/events.md` — actual event system; **delete this file** if the project uses standard framework events only (React props, Vue emits) with no custom event layer
+- [x] Populate `engineering/frontend/state.md` — actual state management approach (store library, context, URL state, and so on)
+- [x] Populate `engineering/frontend/build.md` — actual bundler config, entry points, output paths, path aliases, dev server setup
+- [x] Populate `engineering/frontend/testing.md` — actual test framework and conventions; keep as a placeholder with recommendation if no tests exist yet
+- [x] **Delete the entire `engineering/frontend/` directory** if the project has no frontend (for example, API-only service)
 
 ### Backend tasks
 
-- [ ] Populate `engineering/backend/architecture.md` — real project structure, middleware pipeline, DI setup, logging
-- [ ] Populate `engineering/backend/controllers.md` — actual endpoint patterns with a real example from the codebase
-- [ ] Populate `engineering/backend/views.md` — actual template/view layer; **delete this file** if the project is API-only with no server-rendered views
-- [ ] Populate `engineering/backend/testing.md` — actual test framework; keep as placeholder with recommendation if no tests exist yet
-- [ ] **Delete the entire `engineering/backend/` directory** if the project has no backend (for example, static site)
+- [x] Populate `engineering/backend/architecture.md` — real project structure, middleware pipeline, DI setup, logging
+- [x] Populate `engineering/backend/controllers.md` — actual endpoint patterns with a real example from the codebase
+- [x] Populate `engineering/backend/views.md` — actual template/view layer; **delete this file** if the project is API-only with no server-rendered views
+- [x] Populate `engineering/backend/testing.md` — actual test framework; keep as placeholder with recommendation if no tests exist yet
+- [x] **Delete the entire `engineering/backend/` directory** if the project has no backend (for example, static site)
 
 ### Platform tasks (skip entirely if no CMS/platform-bound layer)
 
 If the project has **no** platform-specific layer to document:
-- [ ] Delete the entire `engineering/platform/` directory, if one exists
-- [ ] Delete `engineering/data/content-types-reference.md`
-- [ ] Delete `engineering/standards/authoring.md` if not already removed in Milestone 4
-- [ ] Skip to checkpoint
+- [x] Delete the entire `engineering/platform/` directory, if one exists
+- [x] Delete `engineering/data/content-types-reference.md`
+- [x] Delete `engineering/standards/authoring.md` if not already removed in Milestone 4
+- [x] Skip to checkpoint
 
 If the project **does** have one (for example, a CMS):
-- [ ] Copy [`examples/platform-umbraco/`](examples/platform-umbraco/) to `engineering/platform/<platform-name>/` as the starting shape (for example, `engineering/platform/umbraco/`). Adapt or delete each file for the real platform; rename a file whose term does not match the platform's own vocabulary
-- [ ] Populate `<platform>/overview.md` — platform, version, admin URL, features in use, content flow
-- [ ] Populate `<platform>/content-types.md` — actual page/content types, how to add new ones, data access syntax
-- [ ] Populate `<platform>/block-grid.md` — actual grid/layout editor usage; **delete** if not used
-- [ ] Populate `<platform>/block-list.md` — actual list editor usage; **delete** if not used
-- [ ] Populate `<platform>/media.md` — media types, storage location, template access syntax
-- [ ] Populate `<platform>/delivery-api.md` — actual API endpoints, response shapes; **delete** if not using a content API
-- [ ] Populate `<platform>/modelling.md` — content architecture, naming conventions, composition patterns
+- [x] Copy [`examples/platform-umbraco/`](examples/platform-umbraco/) to `engineering/platform/<platform-name>/` as the starting shape (for example, `engineering/platform/umbraco/`). Adapt or delete each file for the real platform; rename a file whose term does not match the platform's own vocabulary
+- [x] Populate `<platform>/overview.md` — platform, version, admin URL, features in use, content flow
+- [x] Populate `<platform>/content-types.md` — actual page/content types, how to add new ones, data access syntax
+- [x] Populate `<platform>/block-grid.md` — actual grid/layout editor usage; **delete** if not used
+- [x] Populate `<platform>/block-list.md` — actual list editor usage; **delete** if not used
+- [x] Populate `<platform>/media.md` — media types, storage location, template access syntax
+- [x] Populate `<platform>/delivery-api.md` — actual API endpoints, response shapes; **delete** if not using a content API
+- [x] Populate `<platform>/modelling.md` — content architecture, naming conventions, composition patterns
+
+### Milestone 5 notes (completed 2026-11-10)
+
+- **Kept and populated:** `frontend/architecture.md`, `frontend/state.md`, `frontend/testing.md`, `backend/architecture.md`, `backend/testing.md`.
+- **Deleted (no real code or pattern yet):** `frontend/components.md`, `styles.md`, `animations.md`, `services.md`, `events.md`, `build.md`, and `backend/controllers.md`, `views.md`.
+- **Platform:** no CMS. `engineering/platform/` never existed. `data/content-types-reference.md` is deleted.
+- Recreate a deleted file when real code needs it.
+- Milestone 6 rewrites `data/api.md`. Milestone 7 cleans up the remaining platform wording in `documentation-guide.md` and `AGENTS.md`.
 
 ### Checkpoint
 
-- [ ] Every file either contains real project data or has been deleted
-- [ ] Code examples reference actual file paths from this codebase
-- [ ] No `{{PLACEHOLDER}}` or `<!-- SCAFFOLD -->` markers remain in any file
+- [x] Every file either contains real project data or has been deleted
+- [x] Code examples reference actual file paths from this codebase
+- [x] No `{{PLACEHOLDER}}` or `<!-- SCAFFOLD -->` markers remain in any file
 
 ---
 

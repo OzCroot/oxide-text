@@ -2,12 +2,6 @@
 
 This file defines the frontend data contracts for HTTP communication.
 
-For content API details, see `engineering/platform/<platform-name>/delivery-api.md`,
-once Milestone 5 creates it. Until then, see
-[the example](../../../examples/platform-umbraco/delivery-api.md). This
-note applies to CMS projects only.
-For backend endpoint patterns, see [../backend/controllers.md](../backend/controllers.md).
-
 ## HTTP Methods
 
 <!-- SCAFFOLD: Document your HTTP method constants if you define them -->
