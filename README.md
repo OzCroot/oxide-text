@@ -75,7 +75,7 @@ A single launcher, opened with `Ctrl+P`, finds files, commands, headings, tabs, 
 | Layer | Choice |
 |---|---|
 | Application shell | [Tauri 2](https://tauri.app/) (Rust) |
-| User interface | TypeScript, Svelte 5, Vite |
+| User interface | TypeScript, React, shadcn/ui, Tailwind CSS, Vite |
 | Editor | [CodeMirror 6](https://codemirror.net/) |
 | Markdown | markdown-it, comrak |
 | Syntax highlighting | web-tree-sitter |

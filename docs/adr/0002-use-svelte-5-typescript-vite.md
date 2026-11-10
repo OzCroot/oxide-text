@@ -1,10 +1,12 @@
 ---
-status: proposed
+status: superseded
 date: 2026-11-10
 deciders: [Oz]
 ---
 
 # 0002 — Use Svelte 5, TypeScript, and Vite for the frontend
+
+> Superseded by [ADR 0010](./0010-use-react-shadcn-tailwind.md). The owner chose React.
 
 ## Context
 

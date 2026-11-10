@@ -13,9 +13,11 @@ an [ADR](../adr/). Several ADRs are still `proposed`.
 |-------|-----------|---------|----------|
 | Application shell | Tauri | 2 | [ADR 0001](../adr/0001-use-tauri-with-rust-core.md) |
 | Core language | Rust | not set | [ADR 0001](../adr/0001-use-tauri-with-rust-core.md) |
-| Frontend language | TypeScript | not set | [ADR 0002](../adr/0002-use-svelte-5-typescript-vite.md) |
-| Frontend framework | Svelte | 5 | [ADR 0002](../adr/0002-use-svelte-5-typescript-vite.md) |
-| Bundler | Vite | not set | [ADR 0002](../adr/0002-use-svelte-5-typescript-vite.md) |
+| Frontend language | TypeScript | not set | [ADR 0010](../adr/0010-use-react-shadcn-tailwind.md) |
+| Frontend framework | React | not set | [ADR 0010](../adr/0010-use-react-shadcn-tailwind.md) |
+| UI components | shadcn/ui | not set | [ADR 0010](../adr/0010-use-react-shadcn-tailwind.md) |
+| Styles | Tailwind CSS | not set | [ADR 0010](../adr/0010-use-react-shadcn-tailwind.md) |
+| Bundler | Vite | not set | [ADR 0010](../adr/0010-use-react-shadcn-tailwind.md) |
 | Editor | CodeMirror | 6 | [ADR 0003](../adr/0003-use-codemirror-6-as-the-editor.md) |
 | Code highlighting | web-tree-sitter, in packs | not set | [ADR 0004](../adr/0004-language-packs-with-tree-sitter.md) |
 | Code formatting | WASM in packs, or an external tool | — | [ADR 0005](../adr/0005-formatters-wasm-with-external-option.md) |
@@ -39,7 +41,7 @@ Tauri provides the `dev` and `build` commands for the shell.
 
 ## Architecture Summary
 
-- **Frontend**: a Svelte app in `ui/`. It holds the tab strip, panes, launcher, editor, and preview. Text buffers live here, in the CodeMirror state.
+- **Frontend**: a React app in `ui/`. It holds the tab strip, panes, launcher, editor, and preview. Text buffers live here, in the CodeMirror state.
 - **Backend**: a Rust core in `src-tauri/`, split into crates: `ox-fs`, `ox-index`, `ox-search`, `ox-pkg`, `ox-session`, `ox-settings`, `ox-commands`.
 - **Commands**: every user action is a command with a string id. The menu, keymap, launcher, and tab menus all use the same registry. See [ADR 0009](../adr/0009-command-registry-and-configurable-keymap.md).
 - **Packs**: a pack host loads only when a language pack is installed. The host serves pack files through the custom `oxpkg://` protocol.

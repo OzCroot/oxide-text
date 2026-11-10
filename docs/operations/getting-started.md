@@ -6,7 +6,7 @@ confirms each step in milestone M0, and updates this file then.
 ## Prerequisites
 
 - **Rust**, with the Tauri 2 prerequisites for your operating system
-- **Node.js**, for the Svelte frontend. The minimum version is not set.
+- **Node.js**, for the React frontend. The minimum version is not set.
 - No database is needed.
 
 ## First Run
@@ -20,7 +20,7 @@ The planned layout, from [the plan](../../plan/OXIDE-TEXT-PLAN.md#2-architecture
 
 ```
 src-tauri/            # Rust app, with crates/ (ox-fs, ox-index, ox-search, ox-pkg, ox-session, ox-settings)
-ui/                   # Svelte app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
+ui/                   # React app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
   editor/commands/    # one folder per editing feature
 packs/                # first-party packs, one folder each (lang-rust/, keymap-sublime/)
 tools/oxpkg/          # CLI: build, lint, sign, publish packs

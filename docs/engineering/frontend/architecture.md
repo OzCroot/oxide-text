@@ -2,9 +2,9 @@
 
 ## Overview
 
-A Svelte 5 frontend in TypeScript, in a Tauri webview. The project has no
+A React frontend in TypeScript, with shadcn/ui and Tailwind CSS,, in a Tauri webview. The project has no
 frontend code yet. This file records the decided design. See
-[ADR 0002](../../adr/0002-use-svelte-5-typescript-vite.md) and
+[ADR 0010](../../adr/0010-use-react-shadcn-tailwind.md) and
 [the plan, section 2](../../../plan/OXIDE-TEXT-PLAN.md#2-architecture).
 
 ## Directory Structure
@@ -25,8 +25,8 @@ ui/
 ## Data Flow
 
 ```
-UI (Svelte) ── invoke() commands ──▶ Rust core
-UI (Svelte) ◀── Channel<T> streams ── Rust core   (launcher results, search)
+UI (React)  ── invoke() commands ──▶ Rust core
+UI (React)  ◀── Channel<T> streams ── Rust core   (launcher results, search)
 
 Editor (CodeMirror 6)
   ├─ Markdown mode, built in: source, live, preview, split
@@ -36,6 +36,7 @@ Preview: markdown-it, DOMPurify, scroll sync through data-line attributes
 
 ## Rules
 
+- Mount CodeMirror 6 as a plain view in a component. Do not copy the buffer into React state.
 - Text buffers live in the CodeMirror state. The Rust core receives the text only on save and for session snapshots.
 - Every user action is a command with a string id. The menu, keymap, launcher, and tab menus all dispatch through the command registry.
 - The launcher renders results that the Rust core streams. It caps the list at 200 rows and virtualises it.

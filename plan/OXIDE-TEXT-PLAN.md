@@ -38,7 +38,7 @@ What we change: language packs are **not bundled** but installed on demand, and 
 | Layer | Choice | Why |
 |---|---|---|
 | Shell | **Tauri 2** | Uses the system webview, so the installer is about 5–10 MB instead of Electron's 80+ MB. Rust backend. v2 capability permissions. Built-in updater. |
-| Frontend | **TypeScript + Svelte 5 + Vite** (SolidJS is an equal alternative) | Small runtime, fine-grained reactivity, good fit for a long-lived editor UI. |
+| Frontend | **TypeScript + React + Vite**, with **shadcn/ui** components and **Tailwind CSS** | Largest ecosystem. shadcn/ui gives accessible components that live in the repository. CodeMirror stays outside React state. See ADR 0010. |
 | Editor | **CodeMirror 6** | Proven Markdown support (Lezer markdown + GFM). Decoration API for the live-preview mode. Multi-cursor, folding, search, IME, accessibility. Handles files of 10 MB or more. |
 | Markdown render | **markdown-it** (frontend) + **DOMPurify** | Fast incremental re-render for the preview. The plugin system maps onto add-on packages. |
 | Markdown export | **comrak** (Rust, GFM) + **ammonia** | Same output headless, for HTML export or CLI use. |
@@ -61,7 +61,7 @@ Rejected:
 ## 2. Architecture
 
 ```
-┌─────────────────────────── Webview (TS/Svelte) ───────────────────────────┐
+┌─────────────────────────── Webview (TS/React)  ───────────────────────────┐
 │ Shell UI: tab strip (pins, groups) · panes · sidebar · status bar        │
 │ Launcher (Ctrl+P) ── renders results streamed from Rust                   │
 │ Editor: CodeMirror 6                                                      │
@@ -92,7 +92,7 @@ Repo layout:
 ```
 oxide-text/
   src-tauri/            Rust app + crates/ (ox-fs, ox-index, ox-search, ox-pkg, ox-session, ox-settings)
-  ui/                   Svelte app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
+  ui/                   React app (shell/, launcher/, editor/, markdown/, tabs/, packages/)
     editor/commands/    one folder per editing feature (multicursor/, lines/, comment/, folding/)
   packs/                first-party packs, one folder each (lang-rust/, lang-python/, keymap-sublime/)
   tools/oxpkg/          CLI: build, lint, sign, publish packs
@@ -352,7 +352,7 @@ Configuration:
 
 | M | Scope | Exit criteria |
 |---|---|---|
-| **M0 Skeleton** (1–2 wk) | Tauri 2 + Svelte + CM6. Open, save and save-as with encoding and EOL. Basic tabs, command registry, keymap resolver with the default VS Code/Sublime keymap and `keybindings.jsonc` overrides (§7.1), JSONC settings, light/dark theme. CI for Win, mac and Linux. | Opens and edits a 10 MB file. Installer ≤10 MB on all three OSes. |
+| **M0 Skeleton** (1–2 wk) | Tauri 2 + React + CM6. Open, save and save-as with encoding and EOL. Basic tabs, command registry, keymap resolver with the default VS Code/Sublime keymap and `keybindings.jsonc` overrides (§7.1), JSONC settings, light/dark theme. CI for Win, mac and Linux. | Opens and edits a 10 MB file. Installer ≤10 MB on all three OSes. |
 | **M1 Markdown** (2–3 wk) | Source, Preview and Split modes, scroll sync, formatting commands, lists, tables, paste image, outline, export HTML. | All §3.3 commands are in the registry. Sanitizer tests pass. |
 | **M2 Launcher v1** (2 wk) | Overlay UI. Modes none, `>`, `@` (headings), `:`, `%`. Rust index + nucleo, frecency, preview tab. | ≤16 ms per keystroke on a 100k-file fixture repo. |
 | **M3 Tabs** (2 wk) | Pins, groups, panes, drag and drop, sidebar Open Tabs, hot exit. | Invariant property tests. Kill-and-restore test loses nothing. |
@@ -381,7 +381,7 @@ Testing: Rust unit and property tests (proptest) for the session, index and pkg 
 ---
 
 ## 10. Open questions (please decide)
-1. **Frontend framework:** Svelte 5 (recommended) or SolidJS or React?
+1. ~~Frontend framework?~~ **Decided: React, with shadcn/ui and Tailwind CSS (ADR 0010).**
 2. **Default mode for opened `.md`:** Preview (viewer-first) or Live?
 3. **Knowledge-base features** (wiki-links, backlinks, tags, daily notes): core, a pack, or out of scope?
 4. **Can pinned tabs also belong to a group?** The current plan says no, to keep the model simple.

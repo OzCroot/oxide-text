@@ -15,3 +15,4 @@ team made, and the reason.
 | 2026-11-10 | JSON is a pack. | Keep the base install free of code styling. |
 | 2026-11-10 | Pack formatters are WASM modules. A user setting may point a language at an installed tool. | The sandbox is safe and works offline. The setting gives access to the real tools. |
 | 2026-11-10 | The default keymap follows VS Code and Sublime Text. The link command is `Ctrl+Alt+K`. | Users know these keys. `Ctrl+K` is a chord prefix. |
+| 2026-11-10 | The frontend uses React, shadcn/ui, and Tailwind CSS. This replaces Svelte. | The owner prefers React. It has the largest ecosystem, and shadcn/ui gives accessible components. |
