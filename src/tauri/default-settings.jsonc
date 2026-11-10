@@ -7,6 +7,18 @@
     "fontSize": 14,
     "wordWrap": true
   },
+  "markdown": {
+    // The view mode of a new tab: "source", "preview", or "split"
+    "defaultMode": "source",
+    // The folder for pasted images, relative to the file
+    "imageDir": "assets",
+    // Load images from the web in the preview. Off keeps your reading private.
+    "remoteImages": false,
+    // Turn pasted HTML into Markdown
+    "pasteHtmlAsMarkdown": true,
+    // Pad the columns of tables when you save
+    "formatTablesOnSave": true
+  },
   "files": {
     // Line ending for a new file: "lf", "crlf", or "cr"
     "defaultEol": "lf"

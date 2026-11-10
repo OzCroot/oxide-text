@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { createRegistry } from "../commands";
-import { defaultKeymap } from "./default-keymap";
+import { markdownKeymap } from "../commands/markdown-commands";
+import { defaultKeymap as baseKeymap } from "./default-keymap";
+
+// The keys that ship: the base keymap and the Markdown keymap.
+const defaultKeymap = [...baseKeymap, ...markdownKeymap];
 import { compileLayers } from "./resolver";
 
 describe("default keymap", () => {

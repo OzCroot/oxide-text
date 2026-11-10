@@ -19,3 +19,6 @@ team made, and the reason.
 | 2026-11-10 | pnpm is the package manager. | Fast, strict, and CI can pin its version. See ADR 0011. |
 | 2026-11-10 | App source and project files are under `src/`: `src/ui`, `src/tauri`, `package.json`, and the Vite and TypeScript config. The repo root holds only `docs`, `plan`, `src`, and `.github`. The `scripts/` folder is under `src/` too. | A tidy root. |
 | 2026-11-10 | A file with a Markdown block of more than 5,000 lines opens as plain text. | The Markdown parser takes minutes on a 10 MB file with one block. |
+| 2026-11-10 | Remote images in the preview are off by default, and the sanitizer is the only gate (the policy allows `https:` images so the setting can work). See ADR 0012. | Opening a file must not contact the network. |
+| 2026-11-10 | Table columns are padded when a Markdown file saves (setting `markdown.formatTablesOnSave`, on by default). | The plan says to format on Tab or save. |
+| 2026-11-10 | The default view mode of a new tab is source. | Open question 2 in the plan is still open. |

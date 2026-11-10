@@ -205,6 +205,42 @@ pub fn save_file(
     write_atomic(path, &encode(text, encoding, bom, eol)?)
 }
 
+/// Save binary data to `dir/<stem>-<n>.<ext>`, with the smallest `n` (from 1) that
+/// is free. Makes `dir` if it does not exist. Returns the path of the new file.
+/// `stem` and `ext` must be plain names: no path separators, and `ext` has only
+/// letters and digits.
+pub fn save_unique(dir: &Path, stem: &str, ext: &str, bytes: &[u8]) -> Result<std::path::PathBuf, Error> {
+    let bad = |s: &str| s.is_empty() || s.contains(['/', '\\', '\0']) || s == "." || s == "..";
+    if bad(stem) || ext.is_empty() || ext.len() > 8 || !ext.chars().all(|c| c.is_ascii_alphanumeric()) {
+        return Err(Error::Io(std::io::Error::new(
+            std::io::ErrorKind::InvalidInput,
+            "bad file name",
+        )));
+    }
+    std::fs::create_dir_all(dir)?;
+    for n in 1..100_000u32 {
+        let p = dir.join(format!("{stem}-{n}.{ext}"));
+        match std::fs::OpenOptions::new().write(true).create_new(true).open(&p) {
+            Ok(mut f) => {
+                f.write_all(bytes)?;
+                f.sync_all()?;
+                return Ok(p);
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists => continue,
+            Err(e) => return Err(e.into()),
+        }
+    }
+    Err(Error::Io(std::io::Error::new(std::io::ErrorKind::AlreadyExists, "no free file name")))
+}
+
+/// True if the path has an image file extension that the preview can show.
+pub fn is_image_path(path: &Path) -> bool {
+    matches!(
+        path.extension().and_then(|e| e.to_str()).map(|e| e.to_ascii_lowercase()).as_deref(),
+        Some("png" | "jpg" | "jpeg" | "gif" | "webp" | "svg" | "bmp" | "avif" | "ico")
+    )
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -282,6 +318,36 @@ mod tests {
         assert_eq!(std::fs::read(&p).unwrap(), b"two\r\n");
         let names: Vec<_> = std::fs::read_dir(dir.path()).unwrap().map(|e| e.unwrap().file_name()).collect();
         assert_eq!(names.len(), 1);
+    }
+
+    #[test]
+    fn save_unique_picks_the_next_free_name_and_makes_the_folder() {
+        let dir = tempfile::tempdir().unwrap();
+        let assets = dir.path().join("assets");
+        let a = save_unique(&assets, "note", "png", b"1").unwrap();
+        let b = save_unique(&assets, "note", "png", b"2").unwrap();
+        assert_eq!(a.file_name().unwrap(), "note-1.png");
+        assert_eq!(b.file_name().unwrap(), "note-2.png");
+        std::fs::remove_file(&a).unwrap();
+        // The smallest free number is reused.
+        assert_eq!(save_unique(&assets, "note", "png", b"3").unwrap().file_name().unwrap(), "note-1.png");
+        assert_eq!(std::fs::read(&b).unwrap(), b"2");
+    }
+
+    #[test]
+    fn save_unique_refuses_a_path_in_the_name() {
+        let dir = tempfile::tempdir().unwrap();
+        assert!(save_unique(dir.path(), "../evil", "png", b"x").is_err());
+        assert!(save_unique(dir.path(), "a/b", "png", b"x").is_err());
+        assert!(save_unique(dir.path(), "ok", "p/ng", b"x").is_err());
+        assert!(save_unique(dir.path(), "ok", "", b"x").is_err());
+    }
+
+    #[test]
+    fn image_paths() {
+        assert!(is_image_path(Path::new("a/b.PNG")));
+        assert!(!is_image_path(Path::new("a/b.rs")));
+        assert!(!is_image_path(Path::new("a/b")));
     }
 
     #[test]

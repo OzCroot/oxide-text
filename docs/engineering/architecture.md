@@ -26,7 +26,10 @@ Milestone M0 (the skeleton) is built. The full design is in
 | JSONC settings | `jsonc-parser` 0.26 | — | the plan, section 1 |
 | Code highlighting | web-tree-sitter, in packs | not built | [ADR 0004](../adr/0004-language-packs-with-tree-sitter.md) |
 | Code formatting | WASM in packs, or an external tool | not built | [ADR 0005](../adr/0005-formatters-wasm-with-external-option.md) |
-| Markdown preview | markdown-it, DOMPurify | not built | [ADR 0006](../adr/0006-markdown-rendering-stack.md) |
+| Markdown preview | markdown-it 15 (with footnote and task-list plugins), DOMPurify 3.4 | built in M1 | [ADR 0006](../adr/0006-markdown-rendering-stack.md), [ADR 0012](../adr/0012-preview-security-model.md) |
+| Paste HTML as Markdown | turndown 7 (with its GFM plugin) | built in M1 | the plan, section 3.3 |
+| Open links in the browser | `tauri-plugin-opener` | 2 | [ADR 0012](../adr/0012-preview-security-model.md) |
+| DOM for tests | jsdom | 31 (dev only) | [frontend/testing.md](./frontend/testing.md) |
 | Markdown export | comrak, ammonia (Rust) | not built | [ADR 0006](../adr/0006-markdown-rendering-stack.md) |
 | Fuzzy matching | nucleo (Rust) | not built | the plan, section 1 |
 | Workspace search | `ignore` and `grep-searcher` crates | not built | the plan, section 1 |

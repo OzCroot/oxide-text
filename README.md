@@ -2,7 +2,7 @@
 
 oxide-text is an open source text editor for Markdown documents. It supports many tabs, arranged in named groups. It also highlights a wide range of code syntaxes.
 
-> **Status: early development.** Milestone M0 (the skeleton) is built. Most features below are still planned. The design is in [`plan/OXIDE-TEXT-PLAN.md`](plan/OXIDE-TEXT-PLAN.md). The features below describe the target, not the current state.
+> **Status: early development.** Milestones M0 (skeleton) and M1 (Markdown editing, preview, export) are built, but M1 is not yet tried in the running app. Most features below are still planned. The design is in [`plan/OXIDE-TEXT-PLAN.md`](plan/OXIDE-TEXT-PLAN.md). The features below describe the target, not the current state.
 
 ## Features
 

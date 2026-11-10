@@ -1,5 +1,5 @@
 import { history } from "@codemirror/commands";
-import { bracketMatching, HighlightStyle, syntaxHighlighting } from "@codemirror/language";
+import { bracketMatching, foldGutter, HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { EditorState, type Extension } from "@codemirror/state";
 import { drawSelection, EditorView } from "@codemirror/view";
@@ -30,12 +30,16 @@ function theme(settings: Settings): Extension {
     ".cm-selectionBackground": { background: "var(--selection)" },
     "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground": { background: "var(--selection)" },
     ".cm-matchingBracket": { backgroundColor: "var(--accent)", outline: "1px solid var(--border)" },
+    ".cm-gutters": { backgroundColor: "var(--background)", color: "var(--muted-foreground)", border: "none" },
+    ".cm-foldGutter .cm-gutterElement": { cursor: "pointer", padding: "0 4px" },
   });
 }
 
 export interface EditorHooks {
   onDocChanged(): void;
   onSelectionChanged(view: EditorView): void;
+  /** Return true if the paste was handled. */
+  onPaste?(event: ClipboardEvent, view: EditorView): boolean;
 }
 
 /** The extensions for every editor state. No key is bound here: the command registry owns all keys. */
@@ -53,10 +57,13 @@ export function buildExtensions(settings: Settings, hooks: EditorHooks, withMark
           // Markdown has no line comments. Use HTML comments.
           markdownLanguage.data.of({ commentTokens: { block: { open: "<!--", close: "-->" } } }),
           syntaxHighlighting(markdownStyle),
+          // Fold a section from its heading. The Markdown language knows the sections.
+          foldGutter(),
         ]
       : []),
     theme(settings),
     settings.editor.wordWrap ? EditorView.lineWrapping : [],
+    EditorView.domEventHandlers({ paste: (e, view) => hooks.onPaste?.(e, view) ?? false }),
     EditorView.updateListener.of((u) => {
       // view.setState (a tab switch) is an update with no transactions. It is not an edit.
       if (u.transactions.some((tr) => tr.docChanged)) hooks.onDocChanged();

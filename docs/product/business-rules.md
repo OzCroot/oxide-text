@@ -30,6 +30,11 @@ them is implemented.
 - **Render and code packs ask first:** a pack that runs JavaScript must show a permission prompt once.
 - **Preview output is sanitised:** the system must sanitise the rendered preview. It must not load remote images unless the workspace allows it.
 - **Relative links resolve from the file:** a relative link or image path must resolve against the folder of the file that contains it.
+- **Preview HTML is sanitised:** the webview must never get preview HTML that skipped `sanitizeHtml`. The sanitizer must remove script, event handlers, frames, forms, SVG, `style`, `srcset`, and URLs that are not `http`, `https`, `mailto`, `tel`, or relative.
+- **Remote images are off:** the preview and the exports must not load an image from the web unless `markdown.remoteImages` is on. This keeps the file private.
+- **Links never navigate the webview:** a click on a link in the preview must open a file in a tab, scroll to a heading, or open the system browser. It must never load a page in the webview.
+- **Local images come from open folders only:** the webview must load a local image only from the folder of a file that is open or saved, or from its sub-folders.
+- **Pasted images stay next to the file:** the folder for pasted images (`markdown.imageDir`) must be relative, and must not contain `..`. The system must refuse an image name with a path in it.
 - **A very long block opens as plain text:** the editor must not run the Markdown parser on a file with a block of more than 5,000 lines. The parser takes minutes on such a file.
 - **Saving keeps the encoding:** the system must save a file in the encoding it was read in, with the same byte order mark. It must refuse to save text that the encoding cannot hold.
 - **One group per tab:** a tab must belong to at most one group. A pinned tab must not be in a group. The tabs of a group must be next to each other.

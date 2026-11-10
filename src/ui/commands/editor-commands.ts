@@ -17,6 +17,7 @@ import {
   undo,
   undoSelection,
 } from "@codemirror/commands";
+import { foldAll, foldCode, unfoldAll, unfoldCode } from "@codemirror/language";
 import { selectNextOccurrence, selectSelectionMatches } from "@codemirror/search";
 import { EditorSelection } from "@codemirror/state";
 import type { EditorView } from "@codemirror/view";
@@ -72,6 +73,11 @@ export const editorCommands: Command[] = [
   cm("lines.delete", "Delete Line", deleteLine),
   cm("lines.insertBelow", "Insert Line Below", insertBlankLine),
   cm("lines.insertAbove", "Insert Line Above", insertLineAbove),
+
+  cm("fold.fold", "Fold", foldCode),
+  cm("fold.unfold", "Unfold", unfoldCode),
+  cm("fold.foldAll", "Fold All", foldAll),
+  cm("fold.unfoldAll", "Unfold All", unfoldAll),
 
   cm("indent.more", "Indent", indentMore),
   cm("indent.less", "Outdent", indentLess),

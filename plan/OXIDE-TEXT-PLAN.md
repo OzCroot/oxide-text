@@ -368,6 +368,8 @@ Configuration:
 
 **M0 status (2026-11-10):** built. Deviations from this plan: the keymap resolver and command registry are TypeScript in the frontend, not `ox-commands` in Rust. Settings are read once at startup. The default keymap lacks `Ctrl+K Ctrl+D` (skip occurrence), and `editor.format` waits for M4. Closing a dirty tab asks only "discard?", with no "save" choice. Not yet measured: the macOS and Windows installer sizes, and opening a 10 MB file in the running app (the editor-state test passes).
 
+**M1 status (2026-11-10):** built, with gaps. Built: source, split, and preview modes with scroll sync; every §3.3 editing command (see `docs/operations/configuration.md` for the default keys); format tables on save; paste image and paste HTML; dropped files as links; outline panel (click to jump) and folding by heading; word count, reading time, and selection stats; export to HTML, print to PDF, and copy as rich text. Not built: drag to reorder sections in the outline, and the Live mode (M6). Default view mode stays `source` (open question 2). Not verified in the running app: the editing commands, paste, scroll sync, PDF print (`window.print()` in WebKitGTK), the clipboard read for the link command, and the effect of the content security policy on remote images. The sanitizer, the commands, and the helpers have unit tests.
+
 Testing: Rust unit and property tests (proptest) for the session, index and pkg crates. Vitest for the UI logic. WebdriverIO + tauri-driver for e2e on Windows and Linux (macOS has no WebDriver for WKWebView, so manual plus Playwright on component builds). Perf benchmarks in CI with a fixture repo.
 
 ---

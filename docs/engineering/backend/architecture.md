@@ -27,8 +27,9 @@ export), `trash` (delete to trash), minisign (signing).
 
 ## Protocols
 
-- **Tauri commands** (`invoke`): the frontend calls the core. The app crate (`src/tauri/src/lib.rs`) has three: `open_file`, `save_file`, and `load_config`.
-- **Capabilities:** `src/tauri/capabilities/default.json` lists what the webview may call. It allows the dialogs, and the window title and destroy calls.
+- **Tauri commands** (`invoke`): the frontend calls the core. The app crate (`src/tauri/src/lib.rs`) has these: `open_file`, `save_file`, `check_paths`, `read_image`, `save_image`, and `load_config`. `check_paths` tells which paths exist (the preview marks broken links). `read_image` reads image files only. `save_image` takes raw bytes and saves `dir/<stem>-<n>.<ext>`, and refuses a name with a path in it.
+- **Capabilities:** `src/tauri/capabilities/default.json` lists what the webview may call. It allows the dialogs, the window title and destroy calls, and opening links with `opener:default`.
+- **Asset protocol:** the webview loads local images through `asset:` URLs. The scope starts empty. `open_file`, `save_file`, and `save_image` add the folder of the file. See [ADR 0012](../../adr/0012-preview-security-model.md).
 - **Tauri `Channel`**: the core streams results to the frontend.
 - **`oxpkg://`**: a custom protocol that serves installed pack files (`.wasm`, `.scm`, CSS) to the webview, with a strict content security policy. `wasm-unsafe-eval` is allowed. `unsafe-eval` is not.
 

@@ -8,5 +8,13 @@ export const appCommands: Command[] = [
   { id: "tab.close", title: "Close Tab", run: ({ app }) => app.closeTab() },
   { id: "tab.next", title: "Next Tab", run: ({ app }) => app.nextTab() },
   { id: "tab.previous", title: "Previous Tab", run: ({ app }) => app.previousTab() },
+  { id: "view.source", title: "View: Source", run: ({ app }) => app.setViewMode("source") },
+  { id: "view.preview", title: "View: Preview", run: ({ app }) => app.setViewMode("preview") },
+  { id: "view.split", title: "View: Split", run: ({ app }) => app.setViewMode("split") },
+  { id: "view.cycleMode", title: "View: Cycle Source, Split, Preview", run: ({ app }) => app.cycleViewMode() },
+  { id: "view.toggleOutline", title: "View: Toggle Outline", run: ({ app }) => app.toggleOutline() },
+  { id: "export.html", title: "Export as HTML…", run: ({ app }) => app.exportHtml() },
+  { id: "export.pdf", title: "Export as PDF…", run: ({ app }) => app.exportPdf() },
+  { id: "edit.copyAsRichText", title: "Copy as Rich Text", run: ({ app }) => app.copyAsRichText() },
   { id: "view.toggleTheme", title: "Toggle Light/Dark Theme", run: ({ app }) => app.toggleTheme() },
 ];

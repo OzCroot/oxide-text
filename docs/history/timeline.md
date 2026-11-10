@@ -19,3 +19,4 @@ None of them is complete.
 For a technical decision, see [../adr/](../adr/) instead.
 | 2026-11-10 | Milestone M0 built: Tauri, React, and CodeMirror skeleton, with tabs, open and save, command registry, keymap, settings, themes, and CI. |
 | 2026-11-10 | Source and project files moved under `src/` (`src/ui`, `src/tauri`, `package.json`, tool config). |
+| 2026-11-10 | Milestone M1 built: view modes, preview, scroll sync, Markdown editing commands, tables, paste, outline, folding, export. |

@@ -13,6 +13,13 @@ export const defaultKeymap: Binding[] = [
   { key: "ctrl+tab", command: "tab.next" },
   { key: "ctrl+shift+tab", command: "tab.previous" },
 
+  // Views, outline, export
+  { key: "mod+shift+v", command: "view.cycleMode" },
+  { key: "mod+alt+o", command: "view.toggleOutline" },
+  { key: "mod+alt+e", command: "export.html" },
+  { key: "mod+alt+p", command: "export.pdf" },
+  { key: "mod+alt+shift+c", command: "edit.copyAsRichText" },
+
   // Editing
   { key: "mod+z", command: "edit.undo", when: "editorFocus" },
   { key: "mod+shift+z", command: "edit.redo", when: "editorFocus" },
@@ -42,4 +49,6 @@ export const defaultKeymap: Binding[] = [
   { key: "mod+[", command: "indent.less", when: "editorFocus" },
   { key: "mod+/", command: "comment.toggleLine", when: "editorFocus" },
   { key: "mod+shift+\\", command: "bracket.jumpToMatch", when: "editorFocus" },
+  { key: "mod+shift+[", command: "fold.fold", when: "editorFocus" },
+  { key: "mod+shift+]", command: "fold.unfold", when: "editorFocus" },
 ];

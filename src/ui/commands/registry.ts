@@ -10,6 +10,12 @@ export interface AppActions {
   nextTab(): void;
   previousTab(): void;
   toggleTheme(): void;
+  setViewMode(mode: "source" | "preview" | "split"): void;
+  cycleViewMode(): void;
+  toggleOutline(): void;
+  exportHtml(): Promise<void>;
+  exportPdf(): Promise<void>;
+  copyAsRichText(): Promise<void>;
 }
 
 export interface CommandContext {
