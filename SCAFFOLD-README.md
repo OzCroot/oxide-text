@@ -257,16 +257,23 @@ If the project **does** have one (for example, a CMS):
 
 ### Tasks
 
-- [ ] Populate `engineering/data/models.md` — actual data model approach (ORM, CMS-generated, manual), list of core models
-- [ ] Populate `engineering/data/api.md` — actual HTTP patterns, status codes used, a real fetch/request example, endpoint registry
-- [ ] Populate `engineering/data/events.md` — actual custom events, their payloads, naming convention; **delete** if no custom event system exists
-- [ ] Populate `engineering/data/content-types-reference.md` — quick-reference table of all content types (CMS projects only; delete otherwise)
-- [ ] Add a row to the lookup table in `specifications/README.md` for any complex feature that surfaced since Milestone 1 (see the file for the "when to add a row" test). Create the feature's Confluence page first, through the Atlassian MCP — see `docs/agents/confluence.md` — then add the row
+- [x] Populate `engineering/data/models.md` — actual data model approach (ORM, CMS-generated, manual), list of core models
+- [x] Populate `engineering/data/api.md` — actual HTTP patterns, status codes used, a real fetch/request example, endpoint registry
+- [x] Populate `engineering/data/events.md` — actual custom events, their payloads, naming convention; **delete** if no custom event system exists
+- [x] Populate `engineering/data/content-types-reference.md` — quick-reference table of all content types (CMS projects only; delete otherwise)
+- [x] Add a row to the lookup table in `specifications/README.md` for any complex feature that surfaced since Milestone 1 (see the file for the "when to add a row" test). Create the feature's Confluence page first, through the Atlassian MCP — see `docs/agents/confluence.md` — then add the row
+
+### Milestone 6 notes (completed 2026-11-10)
+
+- `models.md` lists the decided models and links to where each is defined. It does not copy the session model from `frontend/state.md`.
+- `api.md` is now "Data Contracts": the registry index, the frontend and core protocols, the launcher provider, the formatter call, and the command registry. The project has no HTTP API.
+- `events.md` and `content-types-reference.md` are deleted. The project has no custom event system and no CMS.
+- No new specification rows. The Milestone 1 rows already cover every feature.
 
 ### Checkpoint
 
-- [ ] Data files reflect real data contracts from the codebase
-- [ ] `specifications/README.md`'s lookup table accurately lists every known complex feature, whether its Confluence page exists yet or not
+- [x] Data files reflect real data contracts from the codebase
+- [x] `specifications/README.md`'s lookup table accurately lists every known complex feature, whether its Confluence page exists yet or not
 
 ---
 

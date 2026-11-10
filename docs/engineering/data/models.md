@@ -2,51 +2,48 @@
 
 ## Overview
 
-<!-- SCAFFOLD: Describe the approach this project uses for its model and data layer. -->
+The project has no database and no ORM. It defines its data models by hand,
+in Rust and in TypeScript. The project has no code yet. This file records
+the decided models, with the source of each.
 
-Options:
-- ORM-generated models (Entity Framework, Prisma, SQLAlchemy)
-- CMS-generated models (Umbraco Models Builder, WordPress types)
-- Manually-defined DTOs and entities
-- Schema-first (GraphQL, OpenAPI codegen)
+## Models
 
-## Entity Models
+| Model | Owner | Defined in |
+|-------|-------|------------|
+| Session: Window, Pane, TabRef, Group | `ox-session` | [frontend/state.md](../frontend/state.md#session-model) |
+| Pack manifest (`manifest.toml`) | `ox-pkg` | [the plan, section 5.2](../../../plan/OXIDE-TEXT-PLAN.md#52-pack-format-oxpkg-zip) |
+| Registry index (`index.json`) | `ox-pkg` | [api.md](./api.md#registry-index) |
+| Settings (layered JSONC) | `ox-settings` | [configuration](../../operations/configuration.md) |
+| Keybinding entry | `ox-commands` | [configuration](../../operations/configuration.md#keybindings) |
 
-<!-- SCAFFOLD: List each core data model when you create it. -->
+## Pack manifest
 
-| Model | File | Purpose |
-|-------|------|---------|
-| <!-- for example, User --> | `models/User.ts` | User account |
-| <!-- for example, Post --> | `models/Post.ts` | Content item |
+The manifest is TOML. The plan defines these fields:
 
-## DTOs (Data Transfer Objects)
+```toml
+[package]
+id = "lang.rust"
+version = "1.2.0"
+engine = "^1.0"          # oxide-text pack API version
+kind = "language"        # language | theme | snippets | keymap | render
+license = "MIT"
 
-<!-- SCAFFOLD: Describe your DTO pattern for API boundaries -->
+[provides]
+highlight = true
+format = true
 
-```typescript
-// Example request DTO
-interface CreateItemRequest {
-  name: string
-  description?: string
-}
-
-// Example response DTO
-interface ItemResponse {
-  id: string
-  name: string
-  createdAt: string
-}
+[[language]]
+id = "rust"
+name = "Rust"
+extensions = ["rs"]
+filenames = []
+first_line = '^#!.*\brust-script\b'
+fence_aliases = ["rust", "rs"]
 ```
 
 ## Adding New Models
 
-<!-- SCAFFOLD: Describe how to add new data models. -->
-
-1. Define the model / entity
-2. Create or update the database migration
-3. Add corresponding DTOs for API boundaries
-4. Update this file with the new model reference
-
-## CMS Models
-
-<!-- SCAFFOLD: If the project uses a CMS, describe how the CMS generates content models. Remove this section if the project does not use a CMS. -->
+1. Define the model in the crate that owns it.
+2. Define the matching TypeScript type for the frontend.
+3. Update the table above.
+4. If the model is stored on disk, plan how to read an older version.

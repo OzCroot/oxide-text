@@ -1,63 +1,48 @@
-# API Schemas
+# Data Contracts
 
-This file defines the frontend data contracts for HTTP communication.
+oxide-text has no HTTP API of its own. This file lists the contracts the
+plan defines. The project has no code yet, so none is implemented. The
+team adds the exact shapes in the milestone that builds each one.
 
-## HTTP Methods
+## Registry index
 
-<!-- SCAFFOLD: Document your HTTP method constants if you define them -->
+The registry is a static, signed `index.json`. See
+[ADR 0007](../../adr/0007-signed-static-package-registry.md).
 
-This project uses these standard methods:
-
-| Method | Usage |
-|--------|-------|
-| GET | Retrieve data |
-| POST | Create new resource |
-| PUT | Full update |
-| PATCH | Partial update |
-| DELETE | Remove resource |
-
-## Status Codes
-
-| Code | Meaning |
-|------|---------|
-| 200 | OK |
-| 201 | Created |
-| 204 | No Content |
-| 400 | Bad Request |
-| 401 | Unauthorized |
-| 403 | Forbidden |
-| 404 | Not Found |
-| 500 | Server Error |
-
-## Request Pattern
-
-<!-- SCAFFOLD: Replace this example with the pattern this project uses to fetch data. -->
-
-```typescript
-async function fetchData<T>(url: string): Promise<T | null> {
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-    if (response.ok) return await response.json()
-    return null
-  } catch (error) {
-    console.error('Fetch error:', error)
-    return null
-  }
-}
+```
+{ id, versions: [ { v, url, sha256, size, engine } ] }
 ```
 
-## API Endpoints Registry
+- `v` is the pack version.
+- `engine` is the pack API version that the pack needs.
+- The editor checks `sha256` and the signature before it installs a pack.
 
-<!-- SCAFFOLD: List each API endpoint when you create it. -->
+## Frontend and core
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| GET | `/api/items` | List items |
-| POST | `/api/items` | Create item |
-| GET | `/api/items/:id` | Get single item |
-| PUT | `/api/items/:id` | Update item |
-| DELETE | `/api/items/:id` | Delete item |
+- The frontend calls the Rust core with Tauri commands.
+- The core streams launcher and search results over a Tauri `Channel`.
+- The core serves pack files to the webview through `oxpkg://`.
+- The team has not yet named the individual Tauri commands.
+
+## Launcher provider
+
+Each launcher mode is a provider:
+
+```
+{ prefix, title, query(q) → stream<Item>, actions(item) }
+```
+
+Built-in providers are in Rust or TypeScript. Packs may add declarative
+providers, such as static lists or snippet sets.
+
+## Formatter call
+
+A formatter takes text and options, and returns text. A pack formatter is a
+WASM module with no imports. An external formatter takes the text on stdin
+and returns it on stdout. See
+[ADR 0005](../../adr/0005-formatters-wasm-with-external-option.md).
+
+## Command registry
+
+- Every action has a string command id, arguments, and a `when` context.
+- The default ids are in [the plan, section 7.1](../../../plan/OXIDE-TEXT-PLAN.md#71-default-keymap-and-configuration).
