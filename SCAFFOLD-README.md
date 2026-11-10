@@ -112,17 +112,23 @@ Before proceeding, confirm you can answer:
 
 ### Tasks
 
-- [ ] Create an ADR for the backend framework/language choice
-- [ ] Create an ADR for the frontend framework choice (if applicable)
-- [ ] Create an ADR for the CMS/platform choice (if applicable)
-- [ ] Create an ADR for each major third-party integration
-- [ ] Create an ADR for the hosting/deployment target
-- [ ] Use `templates/adr.md` for each ADR. Number them in sequence: `0001-`, `0002-`, and so on
+- [x] Create an ADR for the backend framework/language choice
+- [x] Create an ADR for the frontend framework choice (if applicable)
+- [x] Create an ADR for the CMS/platform choice (if applicable)
+- [x] Create an ADR for each major third-party integration
+- [x] Create an ADR for the hosting/deployment target
+- [x] Use `templates/adr.md` for each ADR. Number them in sequence: `0001-`, `0002-`, and so on
+
+### Milestone 2 notes (completed 2026-11-10)
+
+- Nine ADRs. Four are `accepted` (0004, 0005, 0009 were decided by the owner). The rest are `proposed` because the plan chose them and the owner has not confirmed them.
+- No CMS ADR: the project has no CMS. The third-party integrations are in 0003, 0006, and 0007.
+- ADR 0009 flags a possible conflict with the clean-room rule.
 
 ### Checkpoint
 
-- [ ] `adr/` contains one file per major technical choice, each with `status`, `date`, and `deciders` set and no placeholders left
-- [ ] Each ADR's "Considered Options" section names at least one alternative, even one the team dismissed quickly
+- [x] `adr/` contains one file per major technical choice, each with `status`, `date`, and `deciders` set and no placeholders left
+- [x] Each ADR's "Considered Options" section names at least one alternative, even one the team dismissed quickly
 
 ---
 

@@ -3,7 +3,7 @@
 An ADR records one significant technical decision: what the team chose, why,
 who decided, and what other options the team considered. An ADR answers a
 question every new developer should be able to ask: *"why do we use
-{{FRAMEWORK}}?"*
+Tauri?"*
 
 ## Format
 
@@ -25,7 +25,7 @@ create.
 
 ## Numbering
 
-Use the form `NNNN-short-slug.md`, for example `0001-use-umbraco.md`. Numbers
+Use the form `NNNN-short-slug.md`, for example `0001-use-tauri-with-rust-core.md`. Numbers
 run in sequence. Do not reuse a number, even after a decision is superseded.
 
 ## Kickoff batch
@@ -33,11 +33,11 @@ run in sequence. Do not reuse a number, even after a decision is superseded.
 At the start of a project, write one ADR for each foundational technical
 choice before you write any other engineering documentation. Cover:
 
-- [ ] The backend framework and language
-- [ ] The frontend framework, if the project has one
-- [ ] The CMS or platform, if the project has one
-- [ ] Each major third-party integration
-- [ ] The hosting and deployment target
+- [x] The backend framework and language
+- [x] The frontend framework, if the project has one
+- [x] The CMS or platform, if the project has one (none: the project has no CMS)
+- [x] Each major third-party integration
+- [x] The hosting and deployment target
 
 ## Iterating
 
