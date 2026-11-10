@@ -10,7 +10,7 @@ taxonomy, the file-by-file sitemap, and the maintenance rules.
 
 - `docs/product/` — why the project exists, its users, and its rules
 - `docs/specifications/` — a lookup table to each feature's spec
-- `docs/engineering/` — how the code is built, plus a per-project platform overlay
+- `docs/engineering/` — how the code is built
 - `docs/adr/` — why the team made each technical choice
 - `docs/history/` — project milestones and business decisions
 - `docs/operations/` — how to run and deploy the project
@@ -34,7 +34,7 @@ project — re-run `/setup-matt-pocock-skills` to change it.
 3. Read `./docs/product/overview.md` and `./docs/product/users.md` for business context and audience
 4. Read `./docs/engineering/architecture.md` for the tech stack and the build commands
 5. Check `./docs/engineering/standards/` for code conventions
-6. Check `./docs/engineering/frontend/`, `./docs/engineering/backend/`, or `./docs/engineering/platform/` for team-specific patterns
+6. Check `./docs/engineering/frontend/` or `./docs/engineering/backend/` for team-specific patterns
 7. Check `./docs/specifications/README.md` for an existing spec before you implement a non-trivial feature
 8. Review `./docs/adr/` and `./docs/product/business-rules.md` / `./docs/product/constraints.md` for context you must not violate
 

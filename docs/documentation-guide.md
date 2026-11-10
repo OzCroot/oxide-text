@@ -5,20 +5,17 @@ navigate `docs/` by role.
 
 ## The Taxonomy
 
-`docs/` groups files by **knowledge type**, not by team or platform:
+`docs/` groups files by **knowledge type**, not by team:
 
 - [`product/`](./product/) answers *why and what*: business goals, users,
-  domain rationale, and rules. This folder is platform-agnostic.
+  domain rationale, and rules.
 - [`engineering/`](./engineering/) answers *how*: architecture and
-  conventions. `engineering/platform/` isolates platform-specific detail.
+  conventions.
 - [`specifications/`](./specifications/) bridges `product/` and
   `engineering/` for each feature.
 - [`adr/`](./adr/) records why the team made a technical decision.
 - [`history/`](./history/) records project milestones and business
   decisions.
-
-This structure works for a CMS website, a headless API, or a data pipeline.
-Only `engineering/platform/<platform-name>/` changes between projects.
 
 ## Authority of files
 
@@ -43,7 +40,6 @@ wiki. The model has three tiers:
 ### When to UPDATE an existing file
 
 - **A frontend or backend pattern changes** → update the matching file in `docs/engineering/frontend/` or `docs/engineering/backend/`
-- **CMS or platform content modelling changes** → update the matching file in `docs/engineering/platform/<platform>/`
 - **Architecture changes** (a new module, service, or endpoint) → update `docs/engineering/architecture.md`
 - **The tech stack changes** (the team replaces a dependency) → update `docs/engineering/architecture.md` and add an ADR
 - **A technical decision becomes superseded** → set the ADR's `status` to `superseded` and link to the new ADR
@@ -144,7 +140,7 @@ find it.
 ```
 docs/
 ├── documentation-guide.md      # this file
-├── product/                    # WHY & WHAT — platform-agnostic
+├── product/                    # WHY & WHAT
 │   ├── overview.md             # business goals, project rationale
 │   ├── users.md                # audience: roles, expectations, non-negotiables
 │   ├── domain.md                # why domain concepts/features exist
@@ -152,14 +148,13 @@ docs/
 │   └── constraints.md          # external non-negotiables
 ├── specifications/             # lookup table: feature, spec, reasoning
 │   └── README.md               # the table + convention
-├── engineering/                # HOW — generalised from platform-specific structure
+├── engineering/                # HOW
 │   ├── architecture.md         # tech stack, high-level structure, build commands
 │   ├── standards/              # coding standards (general, language, frontend, backend, component-sizing)
 │   ├── frontend/               # frontend patterns & implementation
 │   ├── backend/                # backend patterns & implementation
-│   ├── data/                   # data models & contracts (API, events, content types)
-│   ├── integrations.md         # third-party APIs, MCP servers
-│   └── platform/               # PER-PROJECT overlay for platform-bound docs (for example, platform/umbraco/)
+│   ├── data/                   # data models and contracts
+│   └── integrations.md         # third-party services
 ├── adr/                        # Architectural Decision Records
 ├── history/                     # project milestones and business decisions
 ├── operations/                  # getting-started, environments, deployment, configuration
@@ -204,7 +199,7 @@ docs/
 |--------|---------|-------------------|
 | `product/` | Why & what | Business goals, users, domain rationale, rules, constraints |
 | `specifications/` | Where to find each feature's spec | A lookup table: feature, spec, reasoning |
-| `engineering/` | How | Architecture, standards, patterns — platform-neutral core + `platform/` overlay |
+| `engineering/` | How | Architecture, standards, and patterns |
 | `adr/` | Why this tech choice | Architectural Decision Records |
 | `history/` | What happened and what the team decided | Milestones, events, and business decisions |
 | `operations/` | How to run it | Setup, environments, deployment, config |
